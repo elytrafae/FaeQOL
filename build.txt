@@ -1,0 +1,3 @@
+displayName = Fae's Quality of Life
+author = elytrafae
+version = 1.0

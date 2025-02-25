@@ -1,0 +1,20 @@
+Items: {
+	Keychain: {
+		DisplayName: Keychain
+		Tooltip:
+			'''
+			Can hold up to 20 different stacks of keys.
+			Right-click with a key to add it.
+			Using the keychain empties it into your inventory!
+			'''
+		ContentsText: Keys inside:
+	}
+
+	TestItem: {
+		DisplayName: Test Item
+		Tooltip: ""
+	}
+}
+
+ItemAlreadConsumed: "[c/696969:You cannot consume any more of this item]"
+NPCUnlockedText: "{0} unlocked!"

@@ -1,0 +1,9 @@
+
+My Quality of Life mod!
+
+This mod currently only adds one item: The Keychain!
+This item lets you hold keys inside, and said keys can be used to open things like chests and doors from within the keychain.
+
+Currently only supports the vanilla chest keys and the Jungle Temple key, but cross-mod support is planned, and there is also a Mod.Call system for adding your own mod's keys!
+
+API information will be compiled shortly.
