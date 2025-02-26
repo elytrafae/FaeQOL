@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Chat;
+﻿using Terraria.Chat;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Audio;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
@@ -49,7 +43,7 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
         }
 
         public sealed override void OnConsumeItem(Player player) {
-            ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromKey("Mods.FaeQOL.NPCUnlockedText", ContentSamples.NpcsByNetId[NPCToUnlock].TypeName), AnnouncementColor);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.FaeQOL.NPCUnlockedText", ContentSamples.NpcsByNetId[NPCToUnlock].TypeName), AnnouncementColor);
             IsNPCSaved = true;
         }
 
