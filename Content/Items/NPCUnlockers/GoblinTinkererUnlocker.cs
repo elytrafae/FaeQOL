@@ -21,6 +21,7 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
         public override void AddRecipes() {
             CreateRecipe()
                 .AddIngredient(ItemID.SpikyBall, 25)
+                .AddIngredient(ItemID.Diamond)
                 .AddTile(DEFAULT_WORKBENCH)
                 .Register();
         }
