@@ -20,6 +20,10 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
         public override SoundStyle UseSound => SoundID.Meowmere;
         public override Color AnnouncementColor => Color.DeepPink;
 
+        public override int Width => 36;
+
+        public override int Height => 36;
+
         public override void AddRecipes() {
             CreateRecipe()
                 .AddIngredient(ItemID.SpiderBanner, 2)

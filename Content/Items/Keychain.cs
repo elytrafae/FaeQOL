@@ -1,5 +1,6 @@
 ﻿using FaeQOL.Systems;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,6 @@ namespace FaeQOL.Content.Items {
 
             List<TooltipLine> cache = new List<TooltipLine>();
 
-            // TODO: Add contained keys line if there are contained keys
             for (int i = 0; i < keys.Length; i++) {
                 if (keys[i] == null || keys[i].IsAir) {
                     continue;
@@ -128,13 +128,15 @@ namespace FaeQOL.Content.Items {
             return null;
         }
 
-        // TODO: Make favorited keys be unable to be inserted, and make a special noise (maybe add text, too?)
-
         public override bool CanRightClick() {
             return (!Main.mouseItem.IsAir) && ItemSets.IsItemKey(Main.mouseItem.type);
         }
 
         public override void RightClick(Player player) {
+            if (Main.mouseItem.favorited) {
+                SoundEngine.PlaySound(SoundID.Shimmer2);
+                return;
+            }
             if (!AddItemIntoKeychain(Main.mouseItem)) {
                 SoundEngine.PlaySound(SoundID.MenuClose);
             }

@@ -37,5 +37,14 @@ namespace FaeQOL.Systems {
             return null;
         }
 
+        public static bool IsBossAlive() {
+            foreach (NPC npc in Main.ActiveNPCs) {
+                if (npc.boss) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

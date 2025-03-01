@@ -14,6 +14,10 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             set => NPC.savedBartender = value; 
         }
 
+        public override int Width => 28;
+
+        public override int Height => 30;
+
         public override void AddRecipes() {
             CreateRecipe()
                 .AddIngredient(ItemID.Ale)

@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FaeQOL.Content.Items {
-    // It's abstract so that I can disable it for release
-    internal abstract class TestItem : ModItem {
+namespace FaeQOL.Content.Items.TestItems
+{
+    internal class LockedLihzardDoor : ModItem {
+
+        public override bool IsLoadingEnabled(Mod mod) {
+            return FaeQOL.TEST_MODE;
+        }
 
         public override void SetDefaults() {
             Item.DefaultToPlaceableTile(TileID.ClosedDoor, 11);

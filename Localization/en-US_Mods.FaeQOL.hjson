@@ -4,7 +4,7 @@ Items: {
 		Tooltip:
 			'''
 			Can hold up to 20 different stacks of keys.
-			Right-click with a key to add it.
+			Right-click with a non-Favorite key to add it.
 			Using the keychain empties it into your inventory!
 			'''
 		ContentsText: Keys inside:
@@ -14,7 +14,110 @@ Items: {
 		DisplayName: Test Item
 		Tooltip: ""
 	}
+
+	GreedySoulFragment: {
+		DisplayName: Greedy Soul Fragment
+		Tooltip: Perhaps with enough of these, the tortured soul shall find relief again.
+	}
+
+	NPCUnlockers: {
+		GoblinTinkererUnlocker: {
+			DisplayName: Ruined Trinket
+			Tooltip: Unlocks the Goblin Tinkerer
+		}
+
+		GolferUnlocker: {
+			DisplayName: Broken Golf Club
+			Tooltip: Unlocks the Golfer
+		}
+
+		StylistUnlocker: {
+			DisplayName: Tangled Scissors
+			Tooltip: Unlocks the Stylist
+		}
+
+		TavernkeepUnlocker: {
+			DisplayName: Otherworldly Brew
+			Tooltip: Unlocks the Tavernkeep
+		}
+
+		TaxCollectorUnlocker: {
+			DisplayName: Rekindled Soul
+			Tooltip: Unlocks the Tax Collector
+		}
+
+		WizardUnlocker: {
+			DisplayName: Magicless Wand
+			Tooltip: Unlocks the Wizard
+		}
+	}
+
+	EventDisablers: {
+		BloodMoonDisabler: {
+			EventDisabledMessage: The Blood Moon has been cured from this world
+			DisplayName: Hallowed Tear
+			Tooltip: Disables naturally occurring Blood Moons
+		}
+
+		GoblinArmyDisabler: {
+			EventDisabledMessage: You signed a Peace Treaty with the Goblins
+			DisplayName: Goblin Peace Treaty
+			Tooltip: Disables naturally occurring Goblin Armies
+		}
+
+		SolarEclipseDisabler: {
+			EventDisabledMessage: You told the moon not to get in front of the sun again
+			DisplayName: Eclipse-B-Gone
+			Tooltip: Disables naturally occurring Solar Eclipses
+		}
+	}
+
+	LockedLihzardDoor: {
+		DisplayName: Locked Lihzard Door
+		Tooltip: ""
+	}
+
+	TimeRipper: {
+		DisplayName: Time Ripper
+		Tooltip: ""
+	}
 }
 
 ItemAlreadConsumed: "[c/696969:You cannot consume any more of this item]"
 NPCUnlockedText: "{0} unlocked!"
+
+Configs: {
+	ClientConfig: {
+		DisplayName: Client Config
+		Headers.Items: Items
+
+		PermanentBuffTracker: {
+			Label: Permanent Buff Tracker
+			Tooltip: A text will appear in the tooltips of Permanent Buff items that appears when you can't use any more of them.
+		}
+	}
+
+	ServerConfig: {
+		DisplayName: Server Config
+
+		NonBossRespawnTimeCap: {
+			Label: Non Boss Respawn Time Cap
+			Tooltip: If above -1, your respawn time cannot go above that many seconds if a boss is not alive.
+		}
+
+		EnableKeychain: {
+			Label: Enable Keychain
+			Tooltip: If enabled, a Keychain item will be added to the game that lets you put keys inside and said keys will be usable to unlock chests/doors.
+		}
+
+		EnableNPCUnlockers: {
+			Label: Enable NPC Unlockers
+			Tooltip: If enbaled, there will be some items that lets you unlock certain NPCs that rely on luck or would otherwise be tedious.
+		}
+
+		EnableEventDisablers: {
+			Label: Enable Event Disablers
+			Tooltip: If enabled, there will be some items added that let you disable naturally occurring and repetitive events.
+		}
+	}
+}

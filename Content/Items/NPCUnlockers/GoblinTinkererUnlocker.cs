@@ -14,6 +14,10 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             set => NPC.savedGoblin = true; 
         }
 
+        public override int Width => 40;
+
+        public override int Height => 40;
+
         public override void AddRecipes() {
             CreateRecipe()
                 .AddIngredient(ItemID.SpikyBall, 25)

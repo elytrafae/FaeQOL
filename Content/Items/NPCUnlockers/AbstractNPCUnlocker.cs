@@ -5,9 +5,15 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
+using FaeQOL.Systems.Config;
+using FaeQOL.Systems;
 
 namespace FaeQOL.Content.Items.NPCUnlockers {
     public abstract class AbstractNPCUnlocker : ModItem {
+
+        public override bool IsLoadingEnabled(Mod mod) {
+            return ModContent.GetInstance<ServerConfig>().EnableNPCUnlockers;
+        }
 
         public const int DEFAULT_WORKBENCH = TileID.WorkBenches;
 
@@ -15,6 +21,8 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
         public abstract bool IsNPCSaved {get; set;}
         public virtual SoundStyle UseSound => SoundID.Unlock;
         public virtual Color AnnouncementColor => Color.Gold;
+        public abstract int Width { get; }
+        public abstract int Height { get; }
 
         public sealed override string LocalizationCategory => base.LocalizationCategory + ".NPCUnlockers";
 
@@ -22,6 +30,7 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             // This is set to true for all NPCs that can be summoned via an Item (calling NPC.SpawnOnPlayer). If this is for a modded boss,
             // write this in the bosses file instead
             NPCID.Sets.MPAllowedEnemies[NPCToUnlock] = true;
+            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player) => IsNPCSaved);
         }
 
         public sealed override void SetDefaults() {
@@ -30,8 +39,11 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.consumable = true;
             Item.useTime = 15;
+            Item.useAnimation = 15;
             Item.makeNPC = NPCToUnlock;
             Item.UseSound = UseSound;
+            Item.width = Width;
+            Item.height = Height;
         }
 
         public sealed override bool CanUseItem(Player player) {

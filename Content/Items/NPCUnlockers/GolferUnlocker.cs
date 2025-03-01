@@ -13,6 +13,11 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             get => NPC.savedGolfer; 
             set => NPC.savedGolfer = value; 
         }
+
+        public override int Width => 40;
+
+        public override int Height => 33;
+
         public override void AddRecipes() {
             CreateRecipe()
                 .AddIngredient(ItemID.FossilOre, 5)

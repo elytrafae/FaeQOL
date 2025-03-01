@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,10 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             set => NPC.savedWizard = value; 
         }
         public override SoundStyle UseSound => SoundID.MaxMana;
-        
+        public override Color AnnouncementColor => new Color(18, 144, 255);
+
+        public override int Width => 50;
+
+        public override int Height => 46;
     }
 }
