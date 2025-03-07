@@ -14,5 +14,9 @@ namespace FaeQOL.Content.Items.EventDisablers {
         }
 
         public override int ItemToGetThisFrom => ItemID.SolarTablet;
+
+        public override int Width => 24;
+
+        public override int Height => 50;
     }
 }

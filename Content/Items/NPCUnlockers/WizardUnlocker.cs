@@ -18,8 +18,8 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
         public override SoundStyle UseSound => SoundID.MaxMana;
         public override Color AnnouncementColor => new Color(18, 144, 255);
 
-        public override int Width => 50;
+        public override int Width => 38;
 
-        public override int Height => 46;
+        public override int Height => 35;
     }
 }

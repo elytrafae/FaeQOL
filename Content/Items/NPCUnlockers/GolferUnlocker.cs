@@ -14,9 +14,9 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             set => NPC.savedGolfer = value; 
         }
 
-        public override int Width => 40;
+        public override int Width => 32;
 
-        public override int Height => 33;
+        public override int Height => 26;
 
         public override void AddRecipes() {
             CreateRecipe()

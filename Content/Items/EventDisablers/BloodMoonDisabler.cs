@@ -15,5 +15,9 @@ namespace FaeQOL.Content.Items.EventDisablers {
         }
 
         public override int ItemToGetThisFrom => ItemID.BloodMoonStarter;
+
+        public override int Width => 26;
+
+        public override int Height => 30;
     }
 }

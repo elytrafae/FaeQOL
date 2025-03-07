@@ -1,9 +1,14 @@
 
-My Quality of Life mod!
+A small Quality of Life mod I made!
 
-This mod currently only adds one item: The Keychain!
-This item lets you hold keys inside, and said keys can be used to open things like chests and doors from within the keychain.
+Current features include:
+	- The Keychain: An item that can hold multiple stacks of keys inside, and keys can be directly consumed from inside to unlock things!
+	- NPC Unlockers: Items you can craft to unlock a select few NPCs, mainly those which are annoying to get, or getting them can heavily rely on RNG.
+	- Event Disablers: Are you tired of the Blood Moon, Goblin Army or the Solar Eclipse interrupting your plans? You can disable them permanently! Just throw the summon item for the event into the shimmer!
+	- A crafting recipe for Bloody Tears due to the Event Disabler feature.
+	- A permanent buff tracker. If you can't use any more of a permanent buff item, it will say so in its tooltip! Especially useful with Recipe Browser so you can make sure before getting another one of the item.
 
-Currently only supports the vanilla chest keys and the Jungle Temple key, but cross-mod support is planned, and there is also a Mod.Call system for adding your own mod's keys!
+Currently only compatible with vanilla content, but cross-mod support is planned.
+If you're a developer, there is also a Mod.Call system for adding your own mod's keys and permanent buffs, documented on my GitHub's Wiki!
 
-API information will be compiled shortly.
+Sprites made by JaimeezNuts/ThatOneArchivist

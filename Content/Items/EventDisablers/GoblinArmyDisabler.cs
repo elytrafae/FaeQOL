@@ -14,5 +14,9 @@ namespace FaeQOL.Content.Items.EventDisablers {
         }
 
         public override int ItemToGetThisFrom => ItemID.GoblinBattleStandard;
+
+        public override int Width => 30;
+
+        public override int Height => 32;
     }
 }

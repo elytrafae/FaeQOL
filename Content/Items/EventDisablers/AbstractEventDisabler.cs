@@ -27,6 +27,9 @@ namespace FaeQOL.Content.Items.EventDisablers {
         public virtual Color AnnouncementColor => Color.Gold;
         public abstract int ItemToGetThisFrom { get; }
 
+        public abstract int Width { get; }
+        public abstract int Height { get; }
+
         public sealed override string LocalizationCategory => base.LocalizationCategory + ".EventDisablers";
         public LocalizedText EventDisabledMessage => this.GetLocalization(nameof(EventDisabledMessage));
 
@@ -44,8 +47,8 @@ namespace FaeQOL.Content.Items.EventDisablers {
             Item.useTime = 15;
             Item.useAnimation = 15;
             Item.UseSound = UseSound;
-            Item.width = 80;
-            Item.height = 80;
+            Item.width = Width;
+            Item.height = Height;
         }
 
         public override bool CanUseItem(Player player) {

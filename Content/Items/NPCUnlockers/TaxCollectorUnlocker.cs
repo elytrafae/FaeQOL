@@ -16,9 +16,9 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             set => NPC.savedTaxCollector = value; 
         }
 
-        public override int Width => 40;
+        public override int Width => 32;
 
-        public override int Height => 40;
+        public override int Height => 64;
 
         public override void AddRecipes() {
             CreateRecipe()

@@ -24,8 +24,8 @@ namespace FaeQOL.Content.Items {
         }
 
         public override void SetDefaults() {
-            Item.width = 32;
-            Item.height = 32;
+            Item.width = 22;
+            Item.height = 22;
             Item.maxStack = Terraria.Item.CommonMaxStack;
             Item.rare = ItemRarityID.LightRed;
             Item.value = Terraria.Item.buyPrice(0, 0, 0, 5);
