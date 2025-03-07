@@ -1,8 +1,11 @@
 ﻿using FaeQOL.Systems;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -22,14 +25,19 @@ namespace FaeQOL.Content.Items {
         public Item[] keys = null;
 
         public static LocalizedText ContentsText { get; private set; }
+        public static Asset<Texture2D> KeysTexture { get; private set; }
+        public static readonly List<int> KEYS_IN_RENDER_ORDER = [ItemID.DungeonDesertKey, ItemID.CorruptionKey, ItemID.CrimsonKey, ItemID.TempleKey, ItemID.ShadowKey, ItemID.GoldenKey, ItemID.HallowedKey, ItemID.FrozenKey, ItemID.JungleKey];
+        const int FRAME_WIDTH = 86;
+        const int FRAME_HEIGHT = 80;
 
         public override void SetStaticDefaults() {
             ContentsText = this.GetLocalization(nameof(ContentsText));
+            KeysTexture = ModContent.Request<Texture2D>(Texture + "_Keys");
         }
 
         public override void SetDefaults() {
-            Item.width = 32;
-            Item.height = 32;
+            Item.width = FRAME_WIDTH;
+            Item.height = FRAME_HEIGHT;
             Item.maxStack = 1;
             Item.useTime = 10;
             Item.useAnimation = 10;
@@ -140,7 +148,6 @@ namespace FaeQOL.Content.Items {
             if (!AddItemIntoKeychain(Main.mouseItem)) {
                 SoundEngine.PlaySound(SoundID.MenuClose);
             }
-            //AddItemIntoKeychain(Main.LocalPlayer.inventory[58]);
         }
 
         public override bool ConsumeItem(Player player) {
@@ -245,6 +252,41 @@ namespace FaeQOL.Content.Items {
             return null;
         }
 
+
+        // RENDERING STUFF //
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
+            BitArray flags = GetKeychainRenderFlags();
+            for (int i = 0; i < KEYS_IN_RENDER_ORDER.Count; i++) {
+                if (flags[i]) {
+                    spriteBatch.Draw(KeysTexture.Value, position, new Rectangle(FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT), Color.White, 0, origin, scale, SpriteEffects.None, 0);
+                }
+            }
+        }
+
+        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) {
+            BitArray flags = GetKeychainRenderFlags();
+            Vector2 drawPos = Item.position - Main.screenPosition;
+            for (int i = 0; i < KEYS_IN_RENDER_ORDER.Count; i++) {
+                if (flags[i]) {
+                    spriteBatch.Draw(KeysTexture.Value, drawPos, new Rectangle(FRAME_WIDTH * i, 0, FRAME_WIDTH, FRAME_HEIGHT), lightColor, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0);
+                }
+            }
+        }
+
+        public BitArray GetKeychainRenderFlags() {
+            TryInitialize();
+            CleanUpKeysArray();
+            BitArray flags = new(KEYS_IN_RENDER_ORDER.Count);
+            int k = 0;
+            while (k < keys.Length && !keys[k].IsAir) {
+                int index = KEYS_IN_RENDER_ORDER.IndexOf(keys[k].type);
+                if (index > -1) {
+                    flags[index] = true;
+                }
+                k++;
+            }
+            return flags;
+        }
 
 
     }
