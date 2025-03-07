@@ -25,13 +25,15 @@ namespace FaeQOL.Content.Items.EventDisablers {
         public abstract bool IsEventDisabled { get; set; }
         public virtual SoundStyle UseSound => SoundID.AbigailSummon;
         public virtual Color AnnouncementColor => Color.Gold;
+        public abstract int ItemToGetThisFrom { get; }
 
         public sealed override string LocalizationCategory => base.LocalizationCategory + ".EventDisablers";
         public LocalizedText EventDisabledMessage => this.GetLocalization(nameof(EventDisabledMessage));
 
-        public override void SetStaticDefaults() {
+        public sealed override void SetStaticDefaults() {
             _ = EventDisabledMessage;
             PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player) => IsEventDisabled);
+            ItemID.Sets.ShimmerTransformToItem[ItemToGetThisFrom] = Type;
         }
 
         public sealed override void SetDefaults() {

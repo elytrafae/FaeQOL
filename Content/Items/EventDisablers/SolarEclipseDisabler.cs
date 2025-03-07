@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ID;
 
 namespace FaeQOL.Content.Items.EventDisablers {
     internal class SolarEclipseDisabler : AbstractEventDisabler {
@@ -11,5 +12,7 @@ namespace FaeQOL.Content.Items.EventDisablers {
             get => EventDisableSystem.isSolarEclipseDisabled;
             set => EventDisableSystem.isSolarEclipseDisabled = value;
         }
+
+        public override int ItemToGetThisFrom => ItemID.SolarTablet;
     }
 }

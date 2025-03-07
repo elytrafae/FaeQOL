@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FaeQOL.Content.Items.EventDisablers {
@@ -12,5 +13,7 @@ namespace FaeQOL.Content.Items.EventDisablers {
             get => EventDisableSystem.isBloodMoonDisabled; 
             set => EventDisableSystem.isBloodMoonDisabled = value; 
         }
+
+        public override int ItemToGetThisFrom => ItemID.BloodMoonStarter;
     }
 }

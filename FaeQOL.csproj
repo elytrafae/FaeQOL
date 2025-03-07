@@ -11,8 +11,10 @@
 	  <None Remove="Content\Items\EventDisablers\BloodMoonDisabler.png" />
 	  <None Remove="Content\Items\EventDisablers\GoblinArmyDisabler.png" />
 	  <None Remove="Content\Items\EventDisablers\SolarEclipseDisabler.png" />
+	  <None Remove="Content\Items\GreedySoulFragment.png" />
 	  <None Remove="Content\Items\NPCUnlockers\GoblinTinkererUnlocker.png" />
 	  <None Remove="Content\Items\NPCUnlockers\TaxCollectorUnlocker.png" />
+	  <None Remove="icon.png" />
 	</ItemGroup>
 
 	<!-- References -->

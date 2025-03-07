@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 namespace FaeQOL {
     public class FaeQOL : Mod {
 
-        public const bool TEST_MODE = true;
+        public const bool TEST_MODE = false;
 
         public override object Call(params object[] args) {
             if (args[0] is not string) {
