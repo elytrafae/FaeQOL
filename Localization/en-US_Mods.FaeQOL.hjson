@@ -10,16 +10,6 @@ Items: {
 		ContentsText: Keys inside:
 	}
 
-	TestItem: {
-		DisplayName: Test Item
-		Tooltip: ""
-	}
-
-	GreedySoulFragment: {
-		DisplayName: Greedy Soul Fragment
-		Tooltip: Perhaps with enough of these, the tortured soul shall find relief again.
-	}
-
 	NPCUnlockers: {
 		GoblinTinkererUnlocker: {
 			DisplayName: Ruined Trinket
@@ -80,6 +70,11 @@ Items: {
 	TimeRipper: {
 		DisplayName: Time Ripper
 		Tooltip: ""
+	}
+
+	SoulOfSleight: {
+		DisplayName: Soul Of Sleight
+		Tooltip: "'The essence of greedy creatures'"
 	}
 }
 

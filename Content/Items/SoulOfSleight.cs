@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
 namespace FaeQOL.Content.Items {
-    public class GreedySoulFragment : ModItem {
+    public class SoulOfSleight : ModItem {
 
         public override void SetStaticDefaults() {
             // Registers a vertical animation with 4 frames and each one will last 5 ticks (1/12 second)
@@ -28,11 +28,11 @@ namespace FaeQOL.Content.Items {
             Item.height = 22;
             Item.maxStack = Terraria.Item.CommonMaxStack;
             Item.rare = ItemRarityID.LightRed;
-            Item.value = Terraria.Item.buyPrice(0, 0, 0, 5);
+            Item.value = Terraria.Item.buyPrice(0, 0, 2, 50);
         }
 
         public override void PostUpdate() {
-            Lighting.AddLight(Item.Center, Color.DarkRed.ToVector3() * 0.55f * Main.essScale); // Makes this item glow when thrown out of inventory.
+            Lighting.AddLight(Item.Center, Color.DarkRed.ToVector3() * 0.65f * Main.essScale); // Makes this item glow when thrown out of inventory.
         }
 
     }

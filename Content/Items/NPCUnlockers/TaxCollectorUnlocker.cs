@@ -22,7 +22,7 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
 
         public override void AddRecipes() {
             CreateRecipe()
-                .AddIngredient<GreedySoulFragment>(10)
+                .AddIngredient<SoulOfSleight>(12)
                 .AddTile(DEFAULT_WORKBENCH)
                 .Register();
         }

@@ -21,5 +21,14 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
         public override int Width => 38;
 
         public override int Height => 35;
+
+        public override void AddRecipes() {
+            CreateRecipe()
+                .AddIngredient(ItemID.Pearlwood, 5)
+                .AddIngredient(ItemID.SoulofLight, 4)
+                .AddIngredient(ItemID.SoulofNight, 4)
+                .AddTile(DEFAULT_WORKBENCH)
+                .Register();
+        }
     }
 }
