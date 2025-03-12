@@ -1,0 +1,3 @@
+
+- Torch God torch pickup
+- Volume slider for Whips specifically
