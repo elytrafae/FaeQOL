@@ -116,3 +116,13 @@ Configs: {
 		}
 	}
 }
+
+BuilderToggles: {
+	TorchPickupBuilderToggle: {
+		OnText: Stack to default torch on pickup on
+		OffText: Stack to default torch on pickup off
+	}
+}
+
+TorchMergeTutorial: "[i:TorchGodsFavor] Right-Click regular torches to merge!"
+CampfireMergeTutorial: "[i:TorchGodsFavor] Right-Click regular campfires to merge!"

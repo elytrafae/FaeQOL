@@ -14,6 +14,7 @@ namespace FaeQOL.Content.BuilderToggles {
     public class TorchPickupBuilderToggle : BuilderToggle {
 		public static LocalizedText OnText { get; private set; }
 		public static LocalizedText OffText { get; private set; }
+		static readonly Color grayColor = new Color(0.6f, 0.6f, 0.6f);
 
 		public override void SetStaticDefaults() {
 			OnText = this.GetLocalization(nameof(OnText));
@@ -25,13 +26,12 @@ namespace FaeQOL.Content.BuilderToggles {
 		public override int NumberOfStates => 2;
 
 		public override string DisplayValue() {
-			return CurrentState == 1 ? OnText : OffValue;
+			return CurrentState == 1 ? OnText.Value : OffText.Value;
 		}
 
 		public override bool Draw(SpriteBatch spriteBatch, ref BuilderToggleDrawParams drawParams) {
-			// TODO: Add rendering
-			// CurrentState
-			return true;
+			drawParams.Color = CurrentState == 1 ? Color.White : grayColor;
+            return true;
 		}
 
 	}
