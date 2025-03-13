@@ -84,11 +84,30 @@ NPCUnlockedText: "{0} unlocked!"
 Configs: {
 	ClientConfig: {
 		DisplayName: Client Config
-		Headers.Items: Items
+
+		Headers: {
+			Items: Items
+			Audio: Audio Header
+		}
 
 		PermanentBuffTracker: {
 			Label: Permanent Buff Tracker
 			Tooltip: A text will appear in the tooltips of Permanent Buff items that appears when you can't use any more of them.
+		}
+
+		WhipNoiseVolume: {
+			Label: Whip Noise Volume
+			Tooltip: ""
+		}
+
+		DrillNoiseVolume: {
+			Label: Drill Noise Volume
+			Tooltip: ""
+		}
+
+		MagicMissleNoiseVolume: {
+			Label: Magic Missle Noise Volume
+			Tooltip: "NOTE: This also affects the Crystal Storm, Sky Fracture and Star Cannon"
 		}
 	}
 
@@ -123,6 +142,3 @@ BuilderToggles: {
 		OffText: Stack to default torch on pickup off
 	}
 }
-
-TorchMergeTutorial: "[i:TorchGodsFavor] Right-Click regular torches to merge!"
-CampfireMergeTutorial: "[i:TorchGodsFavor] Right-Click regular campfires to merge!"
