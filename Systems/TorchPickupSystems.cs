@@ -13,11 +13,11 @@ namespace FaeQOL.Systems {
     public class TorchPickupGlobalItem : GlobalItem {
 
         private static bool IsBiomeTorch(Item item) {
-            return ItemSets.IsTorchGodTorch[item.type];
+            return ItemSets.IsTorchGodTorch.Contains(item.type);
         }
 
         private static bool IsBiomeCampfire(Item item) {
-            return ItemSets.IsTorchGodCampfire[item.type];
+            return ItemSets.IsTorchGodCampfire.Contains(item.type);
         }
 
         public override bool OnPickup(Item item, Player player) {
