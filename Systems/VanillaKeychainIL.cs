@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria.Map;
+using FullSerializer.Internal;
 
 namespace FaeQOL.Systems {
     internal class VanillaKeychainIL : ModSystem {
@@ -16,6 +18,20 @@ namespace FaeQOL.Systems {
 
         public override void Load() {
             IL_Player.TileInteractionsUse += IL_Player_TileInteractionsUse;
+            On_Main.TryFreeingElderSlime += On_Main_TryFreeingElderSlime;
+        }
+
+        private bool On_Main_TryFreeingElderSlime(On_Main.orig_TryFreeingElderSlime orig, int npcIndex) {
+            Player player = Main.player[Main.myPlayer];
+            Item key = Utilities.SearchForKeyInKeychains(player, ItemID.GoldenKey);
+            if (key != null) {
+                key.stack--;
+                if (key.stack <= 0) {
+                    key.TurnToAir();
+                }
+                return true;
+            }
+            return orig(npcIndex);
         }
 
         private void IL_Player_TileInteractionsUse(MonoMod.Cil.ILContext il) {

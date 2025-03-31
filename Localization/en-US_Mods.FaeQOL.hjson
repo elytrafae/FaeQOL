@@ -141,11 +141,42 @@ Items: {
 			Works while in your inventory.
 			'''
 	}
+
+	FaeGoggles: {
+		DisplayName: Fae Goggles
+		Tooltip: ""
+	}
+
+	FaeDress: {
+		DisplayName: Fae Dress
+		Tooltip: ""
+	}
+
+	CorruptMimicKey: {
+		DisplayName: Corrupt Mimic Key
+		Tooltip: ""
+	}
+
+	CrimsonMimicKey: {
+		DisplayName: Crimson Mimic Key
+		Tooltip: ""
+	}
+
+	JungleMimicKey: {
+		DisplayName: Jungle Mimic Key
+		Tooltip: ""
+	}
+
+	RegularMimicKey: {
+		DisplayName: Regular Mimic Key
+		Tooltip: ""
+	}
 }
 
 ItemAlreadConsumed: "[c/696969:You cannot consume any more of this item]"
 OathsBlockDamage: "[c/F20000:Your oaths block damage from this weapon!]"
 NPCUnlockedText: "{0} unlocked!"
+CanBePutOnKeychain: "[c/F0C400:Can be put on a Keychain]"
 
 Configs: {
 	ClientConfig: {

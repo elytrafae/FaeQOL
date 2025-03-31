@@ -1,9 +1,11 @@
 
-- Torch God torch pickup
-- Volume slider for Whips specifically
-- Permanent Buffs stay active
+- While Torch God's Favor is active, you not have a new option to turn all biome torches and campfires you pick up into the default Torch/Campfire to save inventory space
+- Added volume configurations to some noises I find a bit irritating at full volume
+- Permanent Buffs, like those from right-clickable furniture, stay on a character even after death or after leaving a world!
+- When you pick up keys you already have in keychains, they will try to stack into keychains first now!
+- Added "Can be put in a keychain" tooltip for eligible items
+- Made Golden Keys from within Keychains able to unlock Old Shaking Chests
+
 
 - New Keys to summon Mimics (Like Key of Night/Light)
-- Make Keychain automatically stack keys it has into itself
-- Add "Can be put in a keychain" tooltip for eligible items
-- Make keychain able to unlock hopping chest (the one that turns into a slime)
+- Finish vanity set
