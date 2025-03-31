@@ -5,7 +5,7 @@
 - When you pick up keys you already have in keychains, they will try to stack into keychains first now!
 - Added "Can be put in a keychain" tooltip for eligible items
 - Made Golden Keys from within Keychains able to unlock Old Shaking Chests
+- New Keys to summon Mimics
 
-
-- New Keys to summon Mimics (Like Key of Night/Light)
+- Rename keys and add flavor text
 - Finish vanity set
