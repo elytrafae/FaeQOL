@@ -76,9 +76,75 @@ Items: {
 		DisplayName: Soul Of Sleight
 		Tooltip: "'The essence of greedy creatures'"
 	}
+
+	EmptyOath: {
+		DisplayName: Empty Oath
+		Tooltip: Craft into an oath, or discard it.
+	}
+
+	ClasslessOath: {
+		DisplayName: Classless Oath
+		Tooltip:
+			'''
+			Allows you to deal Classless Damage only.
+			Works while in your inventory.
+			'''
+	}
+
+	MeleeOath: {
+		DisplayName: Melee Oath
+		Tooltip:
+			'''
+			Allows you to deal Melee Damage only.
+			Works while in your inventory.
+			'''
+	}
+
+	RangedOath: {
+		DisplayName: Ranged Oath
+		Tooltip:
+			'''
+			Allows you to deal Ranged Damage only.
+			Works while in your inventory.
+			Gives you a Wooden Bow and 100 Arrows 
+			when crafted as your first oath
+			'''
+	}
+
+	MagicOath: {
+		DisplayName: Magic Oath
+		Tooltip:
+			'''
+			Allows you to deal Magic Damage only.
+			Works while in your inventory.
+			Gives you a Wand of Sparking and Mana Crystal
+			when crafted as your first oath
+			'''
+	}
+
+	SummonerOath: {
+		DisplayName: Summoner Oath
+		Tooltip:
+			'''
+			Allows you to deal Summon Damage only.
+			Works while in your inventory.
+			Gives you a Finch Staff and Leather Whip
+			when crafted as your first oath
+			'''
+	}
+
+	ThrowerOath: {
+		DisplayName: Thrower Oath
+		Tooltip:
+			'''
+			Allows you to deal Thrower Damage only.
+			Works while in your inventory.
+			'''
+	}
 }
 
 ItemAlreadConsumed: "[c/696969:You cannot consume any more of this item]"
+OathsBlockDamage: "[c/F20000:Your oaths block damage from this weapon!]"
 NPCUnlockedText: "{0} unlocked!"
 
 Configs: {
@@ -107,7 +173,7 @@ Configs: {
 
 		MagicMissleNoiseVolume: {
 			Label: Magic Missle Noise Volume
-			Tooltip: "NOTE: This also affects the Crystal Storm, Sky Fracture and Star Cannon"
+			Tooltip: NOTE: This also affects the Crystal Storm, Sky Fracture and Star Cannon
 		}
 	}
 

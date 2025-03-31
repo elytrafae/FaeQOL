@@ -30,7 +30,7 @@ namespace FaeQOL.Content.Items.NPCUnlockers {
             // This is set to true for all NPCs that can be summoned via an Item (calling NPC.SpawnOnPlayer). If this is for a modded boss,
             // write this in the bosses file instead
             NPCID.Sets.MPAllowedEnemies[NPCToUnlock] = true;
-            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player) => IsNPCSaved);
+            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player, item) => IsNPCSaved);
         }
 
         public sealed override void SetDefaults() {

@@ -39,8 +39,11 @@ namespace FaeQOL {
 
                 case "RegisterPermanentBuff":
                     AssertType(args, 1, out int itemType);
-                    AssertType(args, 2, out Func<Player, bool> func);
-                    PermanentBuffTracker.ItemConsumedConditions.Add(itemType, func);
+                    if (AssertType(args, 2, out Func<Player, bool> func1, out Func<Player, Item, bool> func2)) {
+                        PermanentBuffTracker.ItemConsumedConditions.Add(itemType, (player, _) => func1.Invoke(player));
+                    } else {
+                        PermanentBuffTracker.ItemConsumedConditions.Add(itemType, func2);
+                    }
                     return true;
 
                 default:

@@ -17,6 +17,11 @@
 	  <None Remove="description_workshop.txt" />
 	  <None Remove="icon.png" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="ThoriumMod">
+	    <HintPath>..\..\ModReader\ThoriumMod\ThoriumMod.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
 
 	<!-- References -->
 

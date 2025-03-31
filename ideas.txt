@@ -1,3 +1,9 @@
 
 - Torch God torch pickup
 - Volume slider for Whips specifically
+- Permanent Buffs stay active
+
+- New Keys to summon Mimics (Like Key of Night/Light)
+- Make Keychain automatically stack keys it has into itself
+- Add "Can be put in a keychain" tooltip for eligible items
+- Make keychain able to unlock hopping chest (the one that turns into a slime)

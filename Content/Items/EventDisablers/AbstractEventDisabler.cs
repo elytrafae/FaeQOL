@@ -35,7 +35,7 @@ namespace FaeQOL.Content.Items.EventDisablers {
 
         public sealed override void SetStaticDefaults() {
             _ = EventDisabledMessage;
-            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player) => IsEventDisabled);
+            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player, item) => IsEventDisabled);
             ItemID.Sets.ShimmerTransformToItem[ItemToGetThisFrom] = Type;
         }
 
