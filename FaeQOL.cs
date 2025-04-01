@@ -1,14 +1,9 @@
 ﻿using FaeQOL.Content.Items;
+using FaeQOL.Content.Items.ClassOaths;
 using FaeQOL.Systems;
+using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.GameContent;
-using Terraria.Map;
 using Terraria.ModLoader;
 
 namespace FaeQOL {
@@ -44,6 +39,33 @@ namespace FaeQOL {
                     } else {
                         PermanentBuffTracker.ItemConsumedConditions.Add(itemType, func2);
                     }
+                    return true;
+
+                case "RegisterBuffThatShouldStayOnForever":
+                case "RegisterFurnitureBuff":
+                    AssertType(args, 1, out int buffType);
+                    PermaBuffsStaySystem.PermanentBuffs.Add(buffType);
+                    return true;
+
+                case "CreateOath":
+                case "CreateClassOath":
+                    AssertType(args, 1, out Mod otherMod);
+                    AssertType(args, 2, out DamageClass dmgClass);
+                    AssertType(args, 3, out string itemNameWithoutOath);
+                    AssertType(args, 4, out Color color);
+                    AssertType(args, 5, out Tuple<int, int>[] itemsToGive);
+                    FilledOath oath = new FilledOath(dmgClass, itemNameWithoutOath, color, itemsToGive);
+                    otherMod.AddContent(oath);
+                    return oath;
+
+                case "RegisterTorchGodTorch":
+                    AssertType(args, 1, out int torchType);
+                    ItemSets.IsTorchGodTorch.Add(torchType);
+                    return true;
+
+                case "RegisterTorchGodCampfire":
+                    AssertType(args, 1, out int campfireType);
+                    ItemSets.IsTorchGodCampfire.Add(campfireType);
                     return true;
 
                 default:
