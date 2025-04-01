@@ -1,24 +1,18 @@
 ﻿using FaeQOL.Content.Items.ClassOaths;
 using FaeQOL.Systems;
-using FaeQOL.Systems.LowLevelTest;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using MonoMod.Cil;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using ThoriumMod.Items.BardItems;
-using ThoriumMod.Utilities;
 
 namespace FaeQOL.CrossMod {
+
     [ExtendsFromMod("ThoriumMod")]
     [JITWhenModsEnabled("ThoriumMod")]
     internal class ThoriumCompatibility : AbstractCrossModCompat {
+
+
         public override string ModName => "ThoriumMod";
 
         public override List<string> PermanentStayBuffs => ["AltarBuff", "ConductorsStandBuff", "NinjaBuff"];
@@ -35,6 +29,7 @@ namespace FaeQOL.CrossMod {
             };
 
 
+        [JITWhenModsEnabled("ThoriumMod")]
         public override void CrossCompatAddOaths(Mod mod, Mod myMod) {
             if (mod.TryFind("BardDamage", out DamageClass bard)) {
                 myMod.AddContent(new FilledOath(bard, "Bard", new(255, 126, 112), []));
@@ -44,38 +39,44 @@ namespace FaeQOL.CrossMod {
             }
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         private static bool InspirationConsumedAll(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return !InspirationConsumableBase.CanBeUsed((InspirationConsumableBase)item.ModItem, player);
+            return !ThoriumMod.Items.BardItems.InspirationConsumableBase.CanBeUsed((ThoriumMod.Items.BardItems.InspirationConsumableBase)item.ModItem, player);
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         private static bool InspirationGemConsumed(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return Main.LocalPlayer.GetThoriumPlayer().consumedInspirationGem;
+            return Main.LocalPlayer.GetModPlayer<ThoriumMod.ThoriumPlayer>().consumedInspirationGem;
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         private static bool CrystalWavesConsumed(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return Main.LocalPlayer.GetThoriumPlayer().consumedCrystalWaveCount >= 5;
+            return Main.LocalPlayer.GetModPlayer<ThoriumMod.ThoriumPlayer>().consumedCrystalWaveCount >= 5;
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         private static bool AstralWaveConsumed(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return Main.LocalPlayer.GetThoriumPlayer().consumedAstralWave;
+            return Main.LocalPlayer.GetModPlayer<ThoriumMod.ThoriumPlayer>().consumedAstralWave;
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         public override void CrossCompatAddILAndDetours(Mod mod) {
             IL.ThoriumMod.Tiles.ChestTileBase.RightClick += ChestTileBase_RightClick;
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         private void ChestTileBase_RightClick(MonoMod.Cil.ILContext il) {
             try {
                 ILCursor c = new ILCursor(il);
@@ -95,10 +96,12 @@ namespace FaeQOL.CrossMod {
             }
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         public static bool HasItemInKeychainInventoryOrVoidBag(Player player, int itemType) { 
             return Utilities.SearchForKeyInKeychains(player, itemType) != null || player.HasItemInInventoryOrOpenVoidBag(itemType);
         }
 
+        [JITWhenModsEnabled("ThoriumMod")]
         public static bool ConsumeItemFromKeychainInventoryOrVoidBag(Player player, int itemType, bool reverse, bool bag) {
             Item itemFromKeychains = Utilities.SearchForKeyInKeychains(player, itemType);
             if (itemFromKeychains != null) {
