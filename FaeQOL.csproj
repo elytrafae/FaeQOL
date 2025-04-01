@@ -17,6 +17,7 @@
 	  <None Remove="Content\Items\SoulOfSleight.png" />
 	  <None Remove="description_workshop.txt" />
 	  <None Remove="icon.png" />
+	  <None Remove="localization\en-US_Mods.FaeQOL.Items.ClassOaths.hjson" />
 	  <None Remove="localization\en-US_Mods.FaeQOL.Items.hjson" />
 	</ItemGroup>
 	<ItemGroup>

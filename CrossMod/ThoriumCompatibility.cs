@@ -16,6 +16,7 @@ using ThoriumMod.Items.BardItems;
 using ThoriumMod.Utilities;
 
 namespace FaeQOL.CrossMod {
+    [ExtendsFromMod("ThoriumMod")]
     [JITWhenModsEnabled("ThoriumMod")]
     internal class ThoriumCompatibility : AbstractCrossModCompat {
         public override string ModName => "ThoriumMod";
@@ -112,9 +113,6 @@ namespace FaeQOL.CrossMod {
             return player.ConsumeItem(itemType, reverse, bag);
         }
 
-
-        // TODO: Add Permanent Boosts https://thoriummod.wiki.gg/wiki/Permanent_boosts
-        // TODO: Add Key support
 
     }
 }
