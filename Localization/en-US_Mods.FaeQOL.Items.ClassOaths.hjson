@@ -1,0 +1,82 @@
+EmptyOath: {
+	DisplayName: Empty Oath
+	Tooltip: Craft into an oath, or discard it.
+}
+
+ClasslessOath: {
+	DisplayName: Classless Oath
+	Tooltip:
+		'''
+		Allows you to deal Classless Damage only.
+		Works while in your inventory.
+		'''
+}
+
+MeleeOath: {
+	DisplayName: Melee Oath
+	Tooltip:
+		'''
+		Allows you to deal Melee Damage only.
+		Works while in your inventory.
+		'''
+}
+
+RangedOath: {
+	DisplayName: Ranged Oath
+	Tooltip:
+		'''
+		Allows you to deal Ranged Damage only.
+		Works while in your inventory.
+		Gives you a Wooden Bow and 100 Arrows 
+		when crafted as your first oath
+		'''
+}
+
+MagicOath: {
+	DisplayName: Magic Oath
+	Tooltip:
+		'''
+		Allows you to deal Magic Damage only.
+		Works while in your inventory.
+		Gives you a Wand of Sparking and Mana Crystal
+		when crafted as your first oath
+		'''
+}
+
+SummonerOath: {
+	DisplayName: Summoner Oath
+	Tooltip:
+		'''
+		Allows you to deal Summon Damage only.
+		Works while in your inventory.
+		Gives you a Finch Staff and Leather Whip
+		when crafted as your first oath
+		'''
+}
+
+ThrowerOath: {
+	DisplayName: Thrower Oath
+	Tooltip:
+		'''
+		Allows you to deal Thrower Damage only.
+		Works while in your inventory.
+		'''
+}
+
+BardOath: {
+	DisplayName: Bard Oath
+	Tooltip:
+		'''
+		Allows you to deal Symphonic Damage only.
+		Works while in your inventory.
+		'''
+}
+
+HealerOath: {
+	DisplayName: Healer Oath
+	Tooltip:
+		'''
+		Allows you to deal Radiant Damage only.
+		Works while in your inventory.
+		'''
+}

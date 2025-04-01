@@ -1,1 +1,118 @@
+Keychain: {
+	DisplayName: Keychain
+	Tooltip:
+		'''
+		Can hold up to 20 different stacks of keys.
+		Right-click with a non-Favorite key to add it.
+		Using the keychain empties it into your inventory!
+		'''
+	ContentsText: Keys inside:
+}
+
+NPCUnlockers: {
+	GoblinTinkererUnlocker: {
+		DisplayName: Ruined Trinket
+		Tooltip: Unlocks the Goblin Tinkerer
+	}
+
+	GolferUnlocker: {
+		DisplayName: Broken Golf Club
+		Tooltip: Unlocks the Golfer
+	}
+
+	StylistUnlocker: {
+		DisplayName: Tangled Scissors
+		Tooltip: Unlocks the Stylist
+	}
+
+	TavernkeepUnlocker: {
+		DisplayName: Otherworldly Brew
+		Tooltip: Unlocks the Tavernkeep
+	}
+
+	TaxCollectorUnlocker: {
+		DisplayName: Rekindled Soul
+		Tooltip: Unlocks the Tax Collector
+	}
+
+	WizardUnlocker: {
+		DisplayName: Magicless Wand
+		Tooltip: Unlocks the Wizard
+	}
+}
+
+EventDisablers: {
+	BloodMoonDisabler: {
+		EventDisabledMessage: The Blood Moon has been cured from this world
+		DisplayName: Hallowed Tear
+		Tooltip: Disables naturally occurring Blood Moons
+	}
+
+	GoblinArmyDisabler: {
+		EventDisabledMessage: You signed a Peace Treaty with the Goblins
+		DisplayName: Goblin Peace Treaty
+		Tooltip: Disables naturally occurring Goblin Armies
+	}
+
+	SolarEclipseDisabler: {
+		EventDisabledMessage: You told the moon not to get in front of the sun again
+		DisplayName: Eclipse-B-Gone
+		Tooltip: Disables naturally occurring Solar Eclipses
+	}
+}
+
+LockedLihzardDoor: {
+	DisplayName: Locked Lihzard Door
+	Tooltip: ""
+}
+
+TimeRipper: {
+	DisplayName: Time Ripper
+	Tooltip: ""
+}
+
+SoulOfSleight: {
+	DisplayName: Soul Of Sleight
+	Tooltip: "'The essence of greedy creatures'"
+}
+
+FaeGogglesHigh: {
+	DisplayName: elytrafae's Goggles (High)
+	Tooltip: "'Thank you ^^'"
+}
+
+FaeGogglesLow: {
+	DisplayName: elytrafae's Goggles (Low)
+	Tooltip: "'Thank you ^^'"
+}
+
+FaeGogglesFace: {
+	DisplayName: elytrafae's Goggles (Face)
+	Tooltip: "'Thank you ^^'"
+}
+
+FaeDress: {
+	DisplayName: elytrafae's Dress
+	Tooltip: "'Thank you ^^'"
+}
+
+CorruptMimicKey: {
+	DisplayName: Rotten Key
+	Tooltip: Charged with rotting souls
+}
+
+CrimsonMimicKey: {
+	DisplayName: Vile Key
+	Tooltip: Charged with fleshy souls
+}
+
+JungleMimicKey: {
+	DisplayName: Spore Key
+	Tooltip: Charged with wild souls
+}
+
+RegularMimicKey: {
+	DisplayName: Golden Key...?
+	Tooltip: Charged with gold... and souls
+}
 

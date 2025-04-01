@@ -31,6 +31,8 @@ namespace FaeQOL.Content.Items.ClassOaths {
             }
         }
 
+        public override string LocalizationCategory => base.LocalizationCategory + ".ClassOaths";
+
         protected override bool CloneNewInstances => true;
 
         readonly DamageClass damageClass;

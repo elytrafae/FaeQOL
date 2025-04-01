@@ -1,11 +1,16 @@
-﻿using FaeQOL.Systems;
+﻿using FaeQOL.Content.Items.ClassOaths;
+using FaeQOL.Systems;
 using FaeQOL.Systems.LowLevelTest;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using MonoMod.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using ThoriumMod.Items.BardItems;
 using ThoriumMod.Utilities;
@@ -17,7 +22,8 @@ namespace FaeQOL.CrossMod {
 
         public override List<string> PermanentStayBuffs => ["AltarBuff", "ConductorsStandBuff", "NinjaBuff"];
 
-        /*
+        public override List<string> KeychainKeys => ["AquaticDepthsBiomeKey", "DesertBiomeKey", "UnderworldBiomeKey"];
+
         public override Dictionary<string, Func<Player, Item, bool>> PermanentBuffItemConditions => new() {
                 {"InspirationCrystalNew", InspirationConsumedAll},
                 {"InspirationFragment", InspirationConsumedAll},
@@ -28,48 +34,84 @@ namespace FaeQOL.CrossMod {
             };
 
 
+        public override void CrossCompatAddOaths(Mod mod, Mod myMod) {
+            if (mod.TryFind("BardDamage", out DamageClass bard)) {
+                myMod.AddContent(new FilledOath(bard, "Bard", new(255, 126, 112), []));
+            }
+            if (mod.TryFind("HealerDamage", out DamageClass healer)) {
+                myMod.AddContent(new FilledOath(healer, "Healer", new(222, 151, 0), []));
+            }
+        }
+
         private static bool InspirationConsumedAll(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return !InspirationCanUseInner(player, item);
-        }
-
-        [JITWhenModsEnabled("ThoriumMod")]
-        private static bool InspirationCanUseInner(Player player, Item item) {
-            return InspirationConsumableBase.CanBeUsed((InspirationConsumableBase)item.ModItem, player);
+            return !InspirationConsumableBase.CanBeUsed((InspirationConsumableBase)item.ModItem, player);
         }
 
         private static bool InspirationGemConsumed(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return InspirationGemConsumedInner;
+            return Main.LocalPlayer.GetThoriumPlayer().consumedInspirationGem;
         }
-
-        [JITWhenModsEnabled("ThoriumMod")]
-        private static bool InspirationGemConsumedInner => Main.LocalPlayer.GetThoriumPlayer().consumedInspirationGem;
 
         private static bool CrystalWavesConsumed(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return CrystalWavesConsumedInner;
+            return Main.LocalPlayer.GetThoriumPlayer().consumedCrystalWaveCount >= 5;
         }
-
-        [JITWhenModsEnabled("ThoriumMod")]
-        private static bool CrystalWavesConsumedInner => Main.LocalPlayer.GetThoriumPlayer().consumedCrystalWaveCount >= 5;
 
         private static bool AstralWaveConsumed(Player player, Item item) {
             if (!ModLoader.HasMod("ThoriumMod")) {
                 return true;
             }
-            return AstralWaveConsumedInner;
+            return Main.LocalPlayer.GetThoriumPlayer().consumedAstralWave;
         }
 
-        [JITWhenModsEnabled("ThoriumMod")]
-        private static bool AstralWaveConsumedInner => Main.LocalPlayer.GetThoriumPlayer().consumedAstralWave;
-        */
+        public override void CrossCompatAddILAndDetours(Mod mod) {
+            IL.ThoriumMod.Tiles.ChestTileBase.RightClick += ChestTileBase_RightClick;
+        }
+
+        private void ChestTileBase_RightClick(MonoMod.Cil.ILContext il) {
+            try {
+                ILCursor c = new ILCursor(il);
+
+                // Remove the simple "HasItem" call and replace it with our own!
+                c.GotoNext(i => i.MatchCallvirt<Player>("HasItemInInventoryOrOpenVoidBag"));
+                c.Remove();
+                c.EmitDelegate(HasItemInKeychainInventoryOrVoidBag);
+
+
+                c.GotoNext(i => i.MatchCallvirt<Player>("ConsumeItem"));
+                c.Remove();
+                c.EmitDelegate(ConsumeItemFromKeychainInventoryOrVoidBag);
+
+            } catch (Exception e) {
+                MonoModHooks.DumpIL(ModContent.GetInstance<FaeQOL>(), il);
+            }
+        }
+
+        public static bool HasItemInKeychainInventoryOrVoidBag(Player player, int itemType) { 
+            return Utilities.SearchForKeyInKeychains(player, itemType) != null || player.HasItemInInventoryOrOpenVoidBag(itemType);
+        }
+
+        public static bool ConsumeItemFromKeychainInventoryOrVoidBag(Player player, int itemType, bool reverse, bool bag) {
+            Item itemFromKeychains = Utilities.SearchForKeyInKeychains(player, itemType);
+            if (itemFromKeychains != null) {
+                if (ItemLoader.ConsumeItem(itemFromKeychains, player)) {
+                    itemFromKeychains.stack--;
+                }
+                if (itemFromKeychains.stack <= 0) {
+                    itemFromKeychains.TurnToAir();
+                }
+                return true;
+            }
+            return player.ConsumeItem(itemType, reverse, bag);
+        }
+
 
         // TODO: Add Permanent Boosts https://thoriummod.wiki.gg/wiki/Permanent_boosts
         // TODO: Add Key support

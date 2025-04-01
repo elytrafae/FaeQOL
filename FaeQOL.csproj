@@ -8,6 +8,7 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Content\Items\DevSet\FaeGogglesLow.png" />
 	  <None Remove="Content\Items\EventDisablers\BloodMoonDisabler.png" />
 	  <None Remove="Content\Items\EventDisablers\GoblinArmyDisabler.png" />
 	  <None Remove="Content\Items\EventDisablers\SolarEclipseDisabler.png" />
@@ -19,6 +20,9 @@
 	  <None Remove="localization\en-US_Mods.FaeQOL.Items.hjson" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Reference Include="MMHOOK_ThoriumMod">
+	    <HintPath>..\..\ModReader\ThoriumMod\MMHOOK_ThoriumMod.dll</HintPath>
+	  </Reference>
 	  <Reference Include="ThoriumMod">
 	    <HintPath>..\..\ModReader\ThoriumMod\ThoriumMod.dll</HintPath>
 	  </Reference>
