@@ -14,6 +14,8 @@ namespace FaeQOL.Content.Items.DevSet {
         public override void SetDefaults() {
             Item.SetShopValues(ItemRarityColor.Cyan9, Terraria.Item.sellPrice(gold: 5));
             Item.vanity = true;
+            Item.width = 20;
+            Item.height = 28;
         }
 
     }

@@ -15,6 +15,8 @@ namespace FaeQOL.Content.Items.DevSet {
             Item.SetShopValues(ItemRarityColor.Cyan9, Terraria.Item.sellPrice(gold: 5));
             Item.vanity = true;
             Item.accessory = true;
+            Item.width = 32;
+            Item.height = 20;
         }
 
         public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player) {

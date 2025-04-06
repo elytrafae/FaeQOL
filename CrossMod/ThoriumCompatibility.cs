@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 
 namespace FaeQOL.CrossMod {
 
+    /*
     [ExtendsFromMod("ThoriumMod")]
     [JITWhenModsEnabled("ThoriumMod")]
     internal class ThoriumCompatibility : AbstractCrossModCompat {
@@ -118,4 +119,5 @@ namespace FaeQOL.CrossMod {
 
 
     }
+    */
 }

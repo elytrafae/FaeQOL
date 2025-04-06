@@ -8,6 +8,7 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Content\Items\DevSet\FaeGogglesFace.png" />
 	  <None Remove="Content\Items\DevSet\FaeGogglesLow.png" />
 	  <None Remove="Content\Items\EventDisablers\BloodMoonDisabler.png" />
 	  <None Remove="Content\Items\EventDisablers\GoblinArmyDisabler.png" />

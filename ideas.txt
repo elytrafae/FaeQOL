@@ -6,8 +6,9 @@
 - Added "Can be put in a keychain" tooltip for eligible items
 - Made Golden Keys from within Keychains able to unlock Old Shaking Chests
 - New Keys to summon Mimics
-- Added support for Thorium
-- Also supports Calamity, but I did nothing for it. If there are issues, let me know!
+- Added, then removed support for Thorium :3
+- Also supports Calamity, but I did nothing for it. If there are issues, let me know so I can remove this text!
+- New mod calls for people wanting to support my mod!
 
-- Add Mod Calls for new stuff!
+
 - Finish vanity set
