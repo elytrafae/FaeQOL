@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FaeQOL.Systems.Config;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Chat;
@@ -15,7 +16,7 @@ namespace FaeQOL.Systems.PreventStupidUIClicksDuringCombat {
         public int disabledTime = 0;
 
         public static bool IsUIDisabled() {
-            return Main.LocalPlayer.GetModPlayer<PreventUIClicksPlayer>().disabledTime > 0;
+            return Main.LocalPlayer.GetModPlayer<PreventUIClicksPlayer>().disabledTime > 0 && ModContent.GetInstance<ClientConfig>().DisableUIClicksWhileUsingItem;
         }
 
         public override void PostUpdate() {
