@@ -56,7 +56,7 @@ namespace FaeQOL.CrossMod {
 
             foreach (string keyID in KeychainKeys) {
                 if (mod.TryFind(keyID, out ModItem keyItem)) {
-                    ItemSets.RegisterKey(keyItem.Type);
+                    CustomSetsSystem.RegisterKey(keyItem.Type);
                 } else {
                     Console.WriteLine("FaeQOL Warning: Item with name " + keyID + " could not be found in mod " + mod.Name + "!");
                 }

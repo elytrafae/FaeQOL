@@ -20,7 +20,7 @@ namespace FaeQOL {
                 case "RegisterKey":
                 case "RegisterKeyType":
                     AssertType(args, 1, out int keyType);
-                    ItemSets.RegisterKey(keyType);
+                    CustomSetsSystem.RegisterKey(keyType);
                     return true;
                 
                 case "GetKeyFromKeychains":
@@ -60,12 +60,12 @@ namespace FaeQOL {
 
                 case "RegisterTorchGodTorch":
                     AssertType(args, 1, out int torchType);
-                    ItemSets.IsTorchGodTorch.Add(torchType);
+                    CustomItemSets.IsTorchGodTorch[torchType] = true;
                     return true;
 
                 case "RegisterTorchGodCampfire":
                     AssertType(args, 1, out int campfireType);
-                    ItemSets.IsTorchGodCampfire.Add(campfireType);
+                    CustomItemSets.IsTorchGodCampfire[campfireType] = true;
                     return true;
 
                 default:

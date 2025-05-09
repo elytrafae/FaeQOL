@@ -9,7 +9,8 @@ Configs: {
 
 		Headers: {
 			Items: Items
-			Audio: Audio Header
+			Audio: Audio
+			Experimental: Experimental
 		}
 
 		PermanentBuffTracker: {
@@ -30,6 +31,11 @@ Configs: {
 		MagicMissleNoiseVolume: {
 			Label: Magic Missle Noise Volume
 			Tooltip: NOTE: This also affects the Crystal Storm, Sky Fracture and Star Cannon
+		}
+
+		DisableUIClicksWhileUsingItem: {
+			Label: Disable UI Clicks While Using Item
+			Tooltip: "Unfinished feature, intends to help you more consistantly attack enemies in chaotic situations. Only works with left-click for now, and doesn't work with buff icons due to technical reasons...'"
 		}
 	}
 
@@ -54,6 +60,22 @@ Configs: {
 		EnableEventDisablers: {
 			Label: Enable Event Disablers
 			Tooltip: If enabled, there will be some items added that let you disable naturally occurring and repetitive events.
+		}
+
+		Headers.Experimental: Experimental Header
+
+		EnableOaths: {
+			Label: Enable Oaths
+			Tooltip: 
+				'''
+				Class Oaths are items that pevent you to deal damage with items 
+				that do not deal the specified class's damage.
+				Multiple oaths can be used to enable multiple classes. 
+				Unfortunately, the feature is not perfect. 
+					- Some things still deal damage, like Thorns, Minecarts and Dashes.
+					- There is a particular softlock in Wrath of the Gods if 
+					  you have any Oaths in your inventory, which I don't know how to solve :/
+				'''
 		}
 	}
 }

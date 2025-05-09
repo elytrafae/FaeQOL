@@ -15,6 +15,7 @@
 
 - Add feature that disables clicking on buffs and the hotbar while using an item
 - Finish vanity set
+- Use new tModLoader set feature
 - Add event disabler for pirates
 - Add event disabler for Slime Rain
 - Add item that can manually start a slime rain

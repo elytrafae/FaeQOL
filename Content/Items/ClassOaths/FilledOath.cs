@@ -1,4 +1,5 @@
-﻿using FaeQOL.Systems.Oaths;
+﻿using FaeQOL.Systems.Config;
+using FaeQOL.Systems.Oaths;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -18,13 +19,15 @@ namespace FaeQOL.Content.Items.ClassOaths {
 
         public class OathLoader : ILoadable {
             public void Load(Mod mod) {
-                FilledOath.WritingTexture = mod.Assets.Request<Texture2D>("Content/Items/ClassOaths/OathWriting");
-                mod.AddContent(new FilledOath(DamageClass.Default, "Classless", Color.White, []));
-                mod.AddContent(new FilledOath(DamageClass.Melee, "Melee", new Color(235, 25, 25), []));
-                mod.AddContent(new FilledOath(DamageClass.Ranged, "Ranged", new Color(0, 180, 60), [new(ItemID.WoodenBow, 1), new(ItemID.WoodenArrow, 100)]));
-                mod.AddContent(new FilledOath(DamageClass.Magic, "Magic", new Color(15, 135, 255), [new(ItemID.WandofSparking, 1), new(ItemID.ManaCrystal, 1)]));
-                mod.AddContent(new FilledOath(DamageClass.Summon, "Summoner", new Color(255, 115, 195), [new(ItemID.BabyBirdStaff, 1), new(ItemID.BlandWhip, 1)]));
-                mod.AddContent(new FilledOath(DamageClass.Throwing, "Thrower", new Color(206, 132, 227), [])); // This also applies to Calamity Rogue. Used its color, too
+                if (ModContent.GetInstance<ServerConfig>().EnableOaths) {
+                    FilledOath.WritingTexture = mod.Assets.Request<Texture2D>("Content/Items/ClassOaths/OathWriting");
+                    mod.AddContent(new FilledOath(DamageClass.Default, "Classless", Color.White, []));
+                    mod.AddContent(new FilledOath(DamageClass.Melee, "Melee", new Color(235, 25, 25), []));
+                    mod.AddContent(new FilledOath(DamageClass.Ranged, "Ranged", new Color(0, 180, 60), [new(ItemID.WoodenBow, 1), new(ItemID.WoodenArrow, 100)]));
+                    mod.AddContent(new FilledOath(DamageClass.Magic, "Magic", new Color(15, 135, 255), [new(ItemID.WandofSparking, 1), new(ItemID.ManaCrystal, 1)]));
+                    mod.AddContent(new FilledOath(DamageClass.Summon, "Summoner", new Color(255, 115, 195), [new(ItemID.BabyBirdStaff, 1), new(ItemID.BlandWhip, 1)]));
+                    mod.AddContent(new FilledOath(DamageClass.Throwing, "Thrower", new Color(206, 132, 227), [])); // This also applies to Calamity Rogue. Used its color, too
+                }
             }
 
             public void Unload() {

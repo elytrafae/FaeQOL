@@ -19,13 +19,13 @@ namespace FaeQOL.Systems {
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
-            if (ItemSets.IsItemKey(item.type)) {
+            if (CustomSetsSystem.IsItemKey(item.type)) {
                 tooltips.Add(new TooltipLine(this.Mod, "item_can_be_put_in_keychain", Language.GetTextValue("Mods.FaeQOL.CanBePutOnKeychain")));
             }
         }
 
         public override bool OnPickup(Item item, Player player) {
-            if (!ItemSets.IsItemKey(item.type)) {
+            if (!CustomSetsSystem.IsItemKey(item.type)) {
                 return true; // This is not a key. Continue as normal.
             }
             Item itemCopy = item.Clone();
@@ -54,7 +54,7 @@ namespace FaeQOL.Systems {
         }
 
         public override bool ItemSpace(Item item, Player player) {
-            if (!ItemSets.IsItemKey(item.type)) {
+            if (!CustomSetsSystem.IsItemKey(item.type)) {
                 return false; // This is not a key. Continue as normal.
             }
 

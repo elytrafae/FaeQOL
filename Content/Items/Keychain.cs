@@ -142,7 +142,7 @@ namespace FaeQOL.Content.Items {
         }
 
         public override bool CanRightClick() {
-            return (!Main.mouseItem.IsAir) && ItemSets.IsItemKey(Main.mouseItem.type);
+            return (!Main.mouseItem.IsAir) && CustomSetsSystem.IsItemKey(Main.mouseItem.type);
         }
 
         public override void RightClick(Player player) {
