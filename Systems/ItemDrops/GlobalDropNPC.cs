@@ -1,4 +1,5 @@
 ﻿using FaeQOL.Content.Items;
+using FaeQOL.Systems.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace FaeQOL.Systems.ItemDrops {
         private static readonly int[] MIMIC_TYPES = [NPCID.Mimic, NPCID.IceMimic, NPCID.PresentMimic, NPCID.BigMimicCorruption, NPCID.BigMimicCrimson, NPCID.BigMimicHallow, NPCID.BigMimicJungle];
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-            if (npc.type == NPCID.SkeletronHead) {
+            if (npc.type == NPCID.SkeletronHead && ModContent.GetInstance<ServerConfig>().EnableKeychain) {
                 LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
                 notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Keychain>()));
                 npcLoot.Add(notExpertRule);

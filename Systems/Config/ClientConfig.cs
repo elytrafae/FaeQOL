@@ -29,5 +29,10 @@ namespace FaeQOL.Systems.Config {
         [Range(0, 150)]
         [DefaultValue(30)]
         public int MagicMissleNoiseVolume;
+
+        [Header("Experimental")]
+        [DefaultValue(false)]
+        public bool DisableUIClicksWhileUsingItem;
+
     }
 }

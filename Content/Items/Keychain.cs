@@ -1,4 +1,5 @@
 ﻿using FaeQOL.Systems;
+using FaeQOL.Systems.Config;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,6 +22,10 @@ using Terraria.ModLoader.IO;
 
 namespace FaeQOL.Content.Items {
     internal class Keychain : ModItem {
+
+        public override bool IsLoadingEnabled(Mod mod) {
+            return ModContent.GetInstance<ServerConfig>().EnableKeychain;
+        }
 
         public Item[] keys = null;
 

@@ -96,6 +96,16 @@ FaeDress: {
 	Tooltip: "'Thank you ^^'"
 }
 
+FaeWings: {
+	DisplayName: elytrafae's Boosters
+	Tooltip: "'Thank you ^^'"
+}
+
+FaeLeggings: {
+	DisplayName: elytrafae's Leggings(?)
+	Tooltip: "'Thank you ^^'"
+}
+
 CorruptMimicKey: {
 	DisplayName: Rotten Key
 	Tooltip: Charged with rotting souls

@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.Map;
 using FullSerializer.Internal;
+using FaeQOL.Systems.Config;
 
 namespace FaeQOL.Systems {
     internal class VanillaKeychainIL : ModSystem {
@@ -17,8 +18,10 @@ namespace FaeQOL.Systems {
         const int DOOR_FLAG = 64;
 
         public override void Load() {
-            IL_Player.TileInteractionsUse += IL_Player_TileInteractionsUse;
-            On_Main.TryFreeingElderSlime += On_Main_TryFreeingElderSlime;
+            if (ModContent.GetInstance<ServerConfig>().EnableKeychain) {
+                IL_Player.TileInteractionsUse += IL_Player_TileInteractionsUse;
+                On_Main.TryFreeingElderSlime += On_Main_TryFreeingElderSlime;
+            }
         }
 
         private bool On_Main_TryFreeingElderSlime(On_Main.orig_TryFreeingElderSlime orig, int npcIndex) {

@@ -1,4 +1,5 @@
 ﻿using FaeQOL.Content.Items;
+using FaeQOL.Systems.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ using Terraria.ModLoader;
 
 namespace FaeQOL.Systems {
     public class KeychainGlobalItem : GlobalItem {
+
+        public override bool IsLoadingEnabled(Mod mod) {
+            return ModContent.GetInstance<ServerConfig>().EnableKeychain;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (ItemSets.IsItemKey(item.type)) {

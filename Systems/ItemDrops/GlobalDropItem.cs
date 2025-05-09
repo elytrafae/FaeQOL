@@ -1,4 +1,5 @@
 ﻿using FaeQOL.Content.Items;
+using FaeQOL.Systems.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FaeQOL.Systems.ItemDrops {
     internal class GlobalDropItem : GlobalItem {
 
         public override void ModifyItemLoot(Item item, ItemLoot itemLoot) {
-            if (item.type == ItemID.SkeletronBossBag) {
+            if (item.type == ItemID.SkeletronBossBag && ModContent.GetInstance<ServerConfig>().EnableKeychain) {
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Keychain>()));
             }
             

@@ -28,5 +28,10 @@ namespace FaeQOL.Systems.Config {
         [ReloadRequired]
         public bool EnableEventDisablers;
 
+        [Header("Experimental")]
+        [DefaultValue(false)]
+        [ReloadRequired]
+        public bool EnableOaths;
+
     }
 }

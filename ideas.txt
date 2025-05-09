@@ -5,10 +5,16 @@
 - When you pick up keys you already have in keychains, they will try to stack into keychains first now!
 - Added "Can be put in a keychain" tooltip for eligible items
 - Made Golden Keys from within Keychains able to unlock Old Shaking Chests
+- The "Enable Keychain" config option is now actually respected instead of doing nothing
 - New Keys to summon Mimics
-- Added, then removed support for Thorium :3
+- Added, then removed support for Thorium due to techical issues
 - Also supports Calamity, but I did nothing for it. If there are issues, let me know so I can remove this text!
 - New mod calls for people wanting to support my mod!
+- 
 
 
+- Add feature that disables clicking on buffs and the hotbar while using an item
 - Finish vanity set
+- Add event disabler for pirates
+- Add event disabler for Slime Rain
+- Add item that can manually start a slime rain
