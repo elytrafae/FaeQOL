@@ -9,15 +9,14 @@ using Terraria.ModLoader;
 
 namespace FaeQOL.Content.Items.EventDisablers {
     internal class BloodMoonDisabler : AbstractEventDisabler {
-        public override bool IsEventDisabled {
-            get => EventDisableSystem.isBloodMoonDisabled; 
-            set => EventDisableSystem.isBloodMoonDisabled = value; 
-        }
+        public override EventDisableSystem.EventDisabledData EventDisableData => EventDisableSystem.bloodMoon;
 
         public override int ItemToGetThisFrom => ItemID.BloodMoonStarter;
 
         public override int Width => 26;
 
         public override int Height => 30;
+
+        
     }
 }

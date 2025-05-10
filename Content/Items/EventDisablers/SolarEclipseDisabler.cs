@@ -8,10 +8,7 @@ using Terraria.ID;
 
 namespace FaeQOL.Content.Items.EventDisablers {
     internal class SolarEclipseDisabler : AbstractEventDisabler {
-        public override bool IsEventDisabled {
-            get => EventDisableSystem.isSolarEclipseDisabled;
-            set => EventDisableSystem.isSolarEclipseDisabled = value;
-        }
+        public override EventDisableSystem.EventDisabledData EventDisableData => EventDisableSystem.solarEclipse;
 
         public override int ItemToGetThisFrom => ItemID.SolarTablet;
 

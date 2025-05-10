@@ -1,5 +1,7 @@
 ﻿using FaeQOL.Systems.Config;
 using MonoMod.Cil;
+using Steamworks;
+using Stubble.Core.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,37 +17,44 @@ using Terraria.ModLoader.IO;
 namespace FaeQOL.Systems {
     internal class EventDisableSystem : ModSystem {
 
-        public static bool isBloodMoonDisabled = false;
-        public static bool isGoblinArmyDisabled = false;
-        public static bool isSolarEclipseDisabled = false;
-        // TODO: *Maybe* add the pirate invasion here, too . . . ?
+        public class EventDisabledData {
+            public readonly string Key;
+            public bool isDisabled = false;
+            public EventDisabledData(string key) {
+                Key = key;
+            }
+        }
 
-        private const string BLOOD_MOON_TAG = "BloodMoonDisabled";
-        private const string GOBLIN_ARMY_TAG = "GoblinArmyDisabled";
-        private const string SOLAR_ECLIPSE_TAG = "SolarEclipseDisabled";
+        public static readonly EventDisabledData bloodMoon = new("BloodMoonDisabled");
+        public static readonly EventDisabledData goblinArmy = new("GoblinArmyDisabled");
+        public static readonly EventDisabledData solarEclipse = new("SolarEclipseDisabled");
+        public static readonly EventDisabledData pirateInvasion = new("PirateInvasionDisabled");
+        public static readonly EventDisabledData slimeRain = new("SlimeRainDisabled");
+
+        public static List<EventDisabledData> eventDisabledDatas = [bloodMoon, goblinArmy, solarEclipse, pirateInvasion, slimeRain];
 
         public override void LoadWorldData(TagCompound tag) {
-            LoadOrDefault(tag, BLOOD_MOON_TAG, ref isBloodMoonDisabled, false);
-            LoadOrDefault(tag, GOBLIN_ARMY_TAG, ref isGoblinArmyDisabled, false);
-            LoadOrDefault(tag, SOLAR_ECLIPSE_TAG, ref isSolarEclipseDisabled, false);
+            foreach (EventDisabledData data in eventDisabledDatas) {
+                LoadOrDefault(tag, data.Key, ref data.isDisabled, false);
+            }
         }
 
         public override void SaveWorldData(TagCompound tag) {
-            tag.Add(BLOOD_MOON_TAG, isBloodMoonDisabled);
-            tag.Add(GOBLIN_ARMY_TAG, isGoblinArmyDisabled);
-            tag.Add(SOLAR_ECLIPSE_TAG, isSolarEclipseDisabled);
+            foreach (EventDisabledData data in eventDisabledDatas) {
+                tag.Add(data.Key, data.isDisabled);
+            }
         }
 
         public override void NetSend(BinaryWriter writer) {
-            writer.Write(isBloodMoonDisabled);
-            writer.Write(isGoblinArmyDisabled);
-            writer.Write(isSolarEclipseDisabled);
+            foreach (EventDisabledData data in eventDisabledDatas) {
+                writer.Write(data.isDisabled);
+            }
         }
 
         public override void NetReceive(BinaryReader reader) {
-            isBloodMoonDisabled = reader.ReadBoolean();
-            isGoblinArmyDisabled = reader.ReadBoolean();
-            isSolarEclipseDisabled = reader.ReadBoolean();
+            foreach (EventDisabledData data in eventDisabledDatas) {
+                data.isDisabled = reader.ReadBoolean();
+            }
         }
 
         private static void LoadOrDefault<T>(TagCompound tag, string key, ref T variable, T defaultValue) {
@@ -62,6 +71,7 @@ namespace FaeQOL.Systems {
                 //On_Main.StartInvasion += On_Main_StartInvasion;
                 IL_Main.UpdateTime_StartNight += IL_Main_UpdateTime_StartNight;
                 IL_Main.UpdateTime_StartDay += IL_Main_UpdateTime_StartDay;
+                IL_Main.UpdateTime += IL_Main_UpdateTime;
             }
         }
 
@@ -69,19 +79,8 @@ namespace FaeQOL.Systems {
             //On_Main.StartInvasion -= On_Main_StartInvasion;
             IL_Main.UpdateTime_StartNight -= IL_Main_UpdateTime_StartNight;
             IL_Main.UpdateTime_StartDay -= IL_Main_UpdateTime_StartDay;
+            IL_Main.UpdateTime -= IL_Main_UpdateTime;
         }
-
-        /*
-        private void On_Main_StartInvasion(On_Main.orig_StartInvasion orig, int type) {
-            bool shouldStart = true;
-            if (type == InvasionID.GoblinArmy) {
-                shouldStart = !isGoblinArmyDisabled;
-            }
-            if (shouldStart) {
-                orig(type); // TODO: Somehow make it so that the item can still trigger the event just fine.
-            }
-        }
-        */
 
         private void IL_Main_UpdateTime_StartNight(ILContext il) {
             try {
@@ -91,7 +90,7 @@ namespace FaeQOL.Systems {
 
                 // If blood moons are disabled, we turn the blood moon off and replace the boolean for the if condition with false
                 c.EmitDelegate((bool isBloodMoon) => {
-                    if (isBloodMoonDisabled) {
+                    if (bloodMoon.isDisabled) {
                         Main.bloodMoon = false;
                         return false;
                     }
@@ -112,7 +111,7 @@ namespace FaeQOL.Systems {
                 c.Index++;
 
                 // Replaces the read boolean with the adjusted value!
-                c.EmitDelegate((bool isEclipse) => { return isEclipse && !isSolarEclipseDisabled; });
+                c.EmitDelegate((bool isEclipse) => { return isEclipse && !solarEclipse.isDisabled; });
 
                 // Now, the Goblin Army!
                 // We will check the Shadow Orb smashed condition for this one
@@ -120,7 +119,31 @@ namespace FaeQOL.Systems {
                 c.Index++;
 
                 // Replaces the read boolean with the adjusted value!
-                c.EmitDelegate((bool isGoblinArmy) => { return isGoblinArmy && !isGoblinArmyDisabled; });
+                c.EmitDelegate((bool isGoblinArmy) => { return isGoblinArmy && !goblinArmy.isDisabled; });
+
+                // Now, the Pirate Invasion!
+                // We will check the Altars Destroyed condition for this one
+                c.GotoNext(i => i.MatchLdsfld<WorldGen>("altarCount"));
+                c.Index++;
+
+                // Replaces the read int with the adjusted value!
+                c.EmitDelegate((int altarsDestroyed) => { return pirateInvasion.isDisabled ? 0 : altarsDestroyed; });
+            } catch (Exception e) {
+                MonoModHooks.DumpIL(ModContent.GetInstance<FaeQOL>(), il);
+            }
+        }
+
+        private void IL_Main_UpdateTime(ILContext il) {
+            try {
+                var c = new ILCursor(il);
+                // Slime rain
+                // First thing that checks the day time in this method is the slime rain condition
+                c.GotoNext(i => i.MatchLdsfld<Main>("dayTime"));
+                c.Index++;
+
+                // Replaces the read boolean with the adjusted value!
+                c.EmitDelegate((bool isDay) => { return isDay && !slimeRain.isDisabled; });
+
             } catch (Exception e) {
                 MonoModHooks.DumpIL(ModContent.GetInstance<FaeQOL>(), il);
             }

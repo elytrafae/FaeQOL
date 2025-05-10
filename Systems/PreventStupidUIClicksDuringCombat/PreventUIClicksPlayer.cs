@@ -13,10 +13,15 @@ using Terraria.ModLoader;
 namespace FaeQOL.Systems.PreventStupidUIClicksDuringCombat {
     public class PreventUIClicksPlayer : ModPlayer {
 
+        // Feature disabled because it hurts my brain
+        public override bool IsLoadingEnabled(Mod mod) {
+            return false;
+        }
+
         public int disabledTime = 0;
 
         public static bool IsUIDisabled() {
-            return Main.LocalPlayer.GetModPlayer<PreventUIClicksPlayer>().disabledTime > 0 && ModContent.GetInstance<ClientConfig>().DisableUIClicksWhileUsingItem;
+            return ModContent.GetInstance<ClientConfig>().DisableUIClicksWhileUsingItem && Main.LocalPlayer.GetModPlayer<PreventUIClicksPlayer>().disabledTime > 0;
         }
 
         public override void PostUpdate() {

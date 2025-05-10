@@ -11,6 +11,11 @@ namespace FaeQOL.Systems.PreventStupidUIClicksDuringCombat {
 
     internal class HotbarItemIL : ModSystem {
 
+        // Feature disabled because it hurts my brain
+        public override bool IsLoadingEnabled(Mod mod) {
+            return false;
+        }
+
         public override void Load() {
             On_ItemSlot.OverrideLeftClick += On_ItemSlot_OverrideLeftClick;
             On_ItemSlot.RightClick_ItemArray_int_int += On_ItemSlot_RightClick_ItemArray_int_int;
@@ -32,6 +37,7 @@ namespace FaeQOL.Systems.PreventStupidUIClicksDuringCombat {
         }
 
         private bool On_ItemSlot_OverrideLeftClick(On_ItemSlot.orig_OverrideLeftClick orig, Terraria.Item[] inv, int context, int slot) {
+            return orig(inv, context, slot);
             if (context == ItemSlot.Context.HotbarItem && PreventUIClicksPlayer.IsUIDisabled()) {
                 return false;
             }

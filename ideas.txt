@@ -9,13 +9,14 @@
 - New Keys to summon Mimics
 - Added, then removed support for Thorium due to techical issues
 - Also supports Calamity, but I did nothing for it. If there are issues, let me know so I can remove this text!
-- New mod calls for people wanting to support my mod!
+- [Technical] New mod calls for people wanting to support my mod!
+- [Technical] The mod now uses tModLoader's named custom sets feature
 - 
 
-
-- Add feature that disables clicking on buffs and the hotbar while using an item
 - Finish vanity set
-- Use new tModLoader set feature
+
 - Add event disabler for pirates
 - Add event disabler for Slime Rain
 - Add item that can manually start a slime rain
+
+- Add feature that disables clicking on buffs and the hotbar while using an item

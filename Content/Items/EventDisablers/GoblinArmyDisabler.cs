@@ -8,10 +8,7 @@ using Terraria.ID;
 
 namespace FaeQOL.Content.Items.EventDisablers {
     internal class GoblinArmyDisabler : AbstractEventDisabler {
-        public override bool IsEventDisabled {
-            get => EventDisableSystem.isGoblinArmyDisabled;
-            set => EventDisableSystem.isGoblinArmyDisabled = value;
-        }
+        public override EventDisableSystem.EventDisabledData EventDisableData => EventDisableSystem.goblinArmy;
 
         public override int ItemToGetThisFrom => ItemID.GoblinBattleStandard;
 

@@ -22,7 +22,7 @@ namespace FaeQOL.Content.Items.EventDisablers {
             return ModContent.GetInstance<ServerConfig>().EnableEventDisablers;
         }
 
-        public abstract bool IsEventDisabled { get; set; }
+        public abstract EventDisableSystem.EventDisabledData EventDisableData { get; }
         public virtual SoundStyle UseSound => SoundID.AbigailSummon;
         public virtual Color AnnouncementColor => Color.Gold;
         public abstract int ItemToGetThisFrom { get; }
@@ -35,7 +35,7 @@ namespace FaeQOL.Content.Items.EventDisablers {
 
         public sealed override void SetStaticDefaults() {
             _ = EventDisabledMessage;
-            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player, item) => IsEventDisabled);
+            PermanentBuffTracker.ItemConsumedConditions.Add(Type, (player, item) => EventDisableData.isDisabled);
             ItemID.Sets.ShimmerTransformToItem[ItemToGetThisFrom] = Type;
         }
 
@@ -52,11 +52,11 @@ namespace FaeQOL.Content.Items.EventDisablers {
         }
 
         public override bool CanUseItem(Player player) {
-            return !IsEventDisabled;
+            return !EventDisableData.isDisabled;
         }
 
         public override bool? UseItem(Player player) {
-            IsEventDisabled = true;
+            EventDisableData.isDisabled = true;
             ChatHelper.DisplayMessage(NetworkText.FromKey(EventDisabledMessage.Key), AnnouncementColor, byte.MaxValue);
             return true;
         }

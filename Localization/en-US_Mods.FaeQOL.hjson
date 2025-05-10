@@ -35,7 +35,7 @@ Configs: {
 
 		DisableUIClicksWhileUsingItem: {
 			Label: Disable UI Clicks While Using Item
-			Tooltip: "Unfinished feature, intends to help you more consistantly attack enemies in chaotic situations. Only works with left-click for now, and doesn't work with buff icons due to technical reasons...'"
+			Tooltip: Unfinished feature, intends to help you more consistantly attack enemies in chaotic situations. Only works with left-click for now, and doesn't work with buff icons due to technical reasons...'
 		}
 	}
 
@@ -66,7 +66,7 @@ Configs: {
 
 		EnableOaths: {
 			Label: Enable Oaths
-			Tooltip: 
+			Tooltip:
 				'''
 				Class Oaths are items that pevent you to deal damage with items 
 				that do not deal the specified class's damage.
