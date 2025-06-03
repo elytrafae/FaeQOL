@@ -12,8 +12,8 @@ namespace FaeQOL.Content.Items.EventDisablers {
 
         public override int ItemToGetThisFrom => ModContent.ItemType<SlimeRainStarter>();
 
-        public override int Width => throw new NotImplementedException();
+        public override int Width => 38;
 
-        public override int Height => throw new NotImplementedException();
+        public override int Height => 44;
     }
 }

@@ -21,8 +21,8 @@ namespace FaeQOL.Content.Items.DevSet {
         public override void SetDefaults() {
             Item.SetShopValues(ItemRarityColor.Cyan9, Terraria.Item.sellPrice(gold: 5));
             //Item.vanity = true; // Technically not vanity because you can use it to fly
-            Item.width = 20;
-            Item.height = 28;
+            Item.width = 34;
+            Item.height = 36;
             Item.accessory = true;
         }
 
