@@ -58,8 +58,8 @@ namespace FaeQOL.Content.Items.ClassOaths {
         public override void SetDefaults() {
             Item.rare = ItemRarityID.White;
             Item.value = 1;
-            Item.width = 32;
-            Item.height = 32;
+            Item.width = 34;
+            Item.height = 36;
         }
 
         public override void UpdateInventory(Player player) {

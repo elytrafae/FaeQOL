@@ -10,7 +10,7 @@ namespace FaeQOL.Content.Items.EventDisablers {
     internal class PirateInvasionDisabler : AbstractEventDisabler {
         public override EventDisableSystem.EventDisabledData EventDisableData => EventDisableSystem.pirateInvasion;
         public override int ItemToGetThisFrom => ItemID.PirateMap;
-        public override int Width => throw new NotImplementedException();
-        public override int Height => throw new NotImplementedException();
+        public override int Width => 28;
+        public override int Height => 28;
     }
 }

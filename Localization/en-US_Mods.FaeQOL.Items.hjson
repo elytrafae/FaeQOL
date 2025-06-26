@@ -59,6 +59,18 @@ EventDisablers: {
 		DisplayName: Eclipse-B-Gone
 		Tooltip: Disables naturally occurring Solar Eclipses
 	}
+
+	PirateInvasionDisabler: {
+		EventDisabledMessage: The Pirates are now navigating back to the Bermuda Triangle
+		DisplayName: Deep Sea Compass
+		Tooltip: Disables naturally occurring Pirate Invasions
+	}
+
+	SlimeRainDisabler: {
+		EventDisabledMessage: Slime Rain, go away! Come back another day!
+		DisplayName: Slimy Umbrella
+		Tooltip: Disables naturally occurring Slime Rains
+	}
 }
 
 LockedLihzardDoor: {
@@ -124,4 +136,14 @@ JungleMimicKey: {
 RegularMimicKey: {
 	DisplayName: Golden Key...?
 	Tooltip: Charged with gold... and souls
+}
+
+SlimeRainStarter: {
+	DisplayName: Handheld Slimy Seed
+	Tooltip: Starts a Slime Rain
+}
+
+EnableAllEvents: {
+	DisplayName: Enable All Events
+	Tooltip: ""
 }

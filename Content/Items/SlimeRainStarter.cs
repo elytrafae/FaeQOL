@@ -18,23 +18,27 @@ namespace FaeQOL.Content.Items {
             Item.useTime = 15;
             Item.useAnimation = 15;
             Item.UseSound = SoundID.Item155;
-            Item.width = Width;
-            Item.height = Height;
+            Item.width = 40;
+            Item.height = 42;
         }
 
-        public override bool ConsumeItem(Player player) {
-            return !Main.slimeRain;
+        public override bool CanUseItem(Player player) {
+            return !Main.slimeRain && Main.dayTime;
         }
 
-        public override void OnConsumeItem(Player player) {
-            Main.StopRain();
-            Main.StartSlimeRain();
+        public override bool? UseItem(Player player) {
+            if (Main.netMode != NetmodeID.MultiplayerClient) {
+                Main.StopRain();
+                Main.StartSlimeRain(true);
+            }
+            return true;
         }
 
         public override void AddRecipes() {
             CreateRecipe()
                 .AddIngredient(ItemID.SlimeCrown)
                 .AddIngredient(ItemID.Gel, 20)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 5)
                 .Register();
         }
 

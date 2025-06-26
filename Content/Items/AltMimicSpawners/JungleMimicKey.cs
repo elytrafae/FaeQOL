@@ -7,6 +7,8 @@ namespace FaeQOL.Content.Items.AltMimicSpawners {
 
         public override void SetDefaults() {
             Item.CloneDefaults(ItemID.NightKey);
+            Item.width = 22;
+            Item.height = 42;
         }
 
         public override void AddRecipes() {

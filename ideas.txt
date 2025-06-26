@@ -11,12 +11,12 @@
 - Also supports Calamity, but I did nothing for it. If there are issues, let me know so I can remove this text!
 - [Technical] New mod calls for people wanting to support my mod!
 - [Technical] The mod now uses tModLoader's named custom sets feature
-- 
+- Added event disabler for Pirate Invasion and Slime Rain
+- Added event starter for Slime Rain
 
-- Finish vanity set
+- Added Class Oaths as an Experimental Feature that can be enabled with the config
+- Added "Disable clicking on UI while attacking" feature while using an item. It's currently unfinished, as it's intended to work with all UI, but the code for UI is messy and can hardly be tampered with (especially buffs)
 
-- Add event disabler for pirates
-- Add event disabler for Slime Rain
-- Add item that can manually start a slime rain
 
-- Add feature that disables clicking on buffs and the hotbar while using an item
+TODO:
+- Finish Vanity Set

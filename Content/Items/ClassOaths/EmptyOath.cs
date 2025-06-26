@@ -18,8 +18,8 @@ namespace FaeQOL.Content.Items.ClassOaths {
         public override string LocalizationCategory => base.LocalizationCategory + ".ClassOaths";
 
         public override void SetDefaults() {
-            Item.width = 32;
-            Item.height = 32;
+            Item.width = 34;
+            Item.height = 36;
         }
 
         public override void AddRecipes() {
