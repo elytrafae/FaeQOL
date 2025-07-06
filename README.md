@@ -6,10 +6,15 @@ Current features include:
 <ul>
 	<li>The Keychain: An item that can hold multiple stacks of keys inside, and keys can be directly consumed from inside to unlock things!</li>
 	<li>NPC Unlockers: Items you can craft to unlock a select few NPCs, mainly those which are annoying to get, or getting them can heavily rely on RNG.</li>
-	<li>Event Disablers: Are you tired of the Blood Moon, Goblin Army or the Solar Eclipse interrupting your plans? You can disable them permanently! Just throw the summon item for the event into the shimmer!</li>
+	<li>Event Disablers: Are you tired of the Slime Rain, Blood Moon, Goblin Army, Pirate Invasion or the Solar Eclipse interrupting your plans? You can disable them permanently! Just throw the summon item for the event into the shimmer!</li>
 	<li>A crafting recipe for Bloody Tears due to the Event Disabler feature.</li>
+	<li>An item to manually start Slime Rains due to the Event Disabler feature.</li>
 	<li>A permanent buff tracker. If you can't use any more of a permanent buff item, it will say so in its tooltip! Especially useful with Recipe Browser so you can make sure before getting another one of the item.</li>
 	<li>Reduced respawn time while no boss is alive</li>
+	<li>Infinite furniture buffs now stay on you through respawns and relogs</li>
+	<li>Added new items to summon specific types of Mimics in Hardmode (work the same way as the Key of Light/Night)</li>
+	<li>Some volume sliders for some sounds I personally find irritating when on full volume (could work on expanding this if people want to)</li>
+	<li>The Torch God's Favor now adds an additional togglable power that makes all Torches and Campfires affected by the Torch God's Favor turn back into their default forms when picked up</li>
 </ul>
 
 Most features in this mod are configurable!
