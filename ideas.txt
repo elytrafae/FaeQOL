@@ -1,24 +1,7 @@
 
-- While Torch God's Favor is active, you not have a new option to turn all biome torches and campfires you pick up into the default Torch/Campfire to save inventory space
-- Added volume configurations to some noises I find a bit irritating at full volume
-- Permanent Buffs, like those from right-clickable furniture, stay on a character even after death or after leaving a world!
-- When you pick up keys you already have in keychains, they will try to stack into keychains first now!
-- Added "Can be put in a keychain" tooltip for eligible items
-- Made Golden Keys from within Keychains able to unlock Old Shaking Chests
-- The "Enable Keychain" config option is now actually respected instead of doing nothing
-- New Keys to summon Mimics
-- Added, then removed support for Thorium due to techical issues
-- Also supports Calamity, but I did nothing for it. If there are issues, let me know so I can remove this text!
-- [Technical] New mod calls for people wanting to support my mod!
-- [Technical] The mod now uses tModLoader's named custom sets feature
-- Added event disabler for Pirate Invasion and Slime Rain
-- Added event starter for Slime Rain
-
-- Added Class Oaths as an Experimental Feature that can be enabled with the config
-- Added "Disable clicking on UI while attacking" feature while using an item. It's currently unfinished, as it's intended to work with all UI, but the code for UI is messy and can hardly be tampered with (especially buffs)
-
+- Fixed Lockboxes not working with Keychains
+- Fixed the torch toggle sprites
 
 TODO:
-- Fix Lockboxes not working with Keychains
 - Banner collector
 - Finish Vanity Set

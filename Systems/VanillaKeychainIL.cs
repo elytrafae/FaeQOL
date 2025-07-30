@@ -29,30 +29,51 @@ namespace FaeQOL.Systems {
         private void IL_ItemSlot_TryOpenContainer(ILContext il) {
             try {
                 var c = new ILCursor(il);
+                var c2 = new ILCursor(il); // This is gonna be used for obtaining labels
                 // Skip to the Golden Lock Box ID
-                c.GotoNext(MoveType.After, i => i.MatchStfld<Item>("type"), i => i.MatchLdcI4(ItemID.LockBox));
+                c.GotoNext(MoveType.After, i => i.MatchLdfld<Item>("type"), i => i.MatchLdcI4(ItemID.LockBox));
                 c.Index++; // Go below the equals check
 
-                
+                // Get the label needed to jump to if we consumed the key
+                ILLabel goldenLockLabel = null;
+                c2.GotoNext(MoveType.After, i => i.MatchLdfld<Item>("type"), i => i.MatchLdcI4(ItemID.LockBox));
+                c2.GotoNext(i => i.MatchBrtrue(out goldenLockLabel));
+                if (goldenLockLabel != null) {
+                    // Push the following onto the stack:
+                    c.Emit(Mono.Cecil.Cil.OpCodes.Ldarg_1); // Player (arg1)
+                    c.EmitDelegate((Player player) => {
+                        Item key = Utilities.SearchForKeyInKeychains(player, ItemID.GoldenKey);
+                        if (key == null) {
+                            return false;
+                        }
+                        if (ItemLoader.ConsumeItem(key, player)) {
+                            key.stack--;
+                        }
+                        if (key.stack <= 0) {
+                            key.TurnToAir();
+                        }
+                        return true;
+                    });
+                    c.EmitBrtrue(goldenLockLabel);
+                }
 
-                // Push the following onto the stack:
-                c.Emit(Mono.Cecil.Cil.OpCodes.Ldarg_1); // Player (arg1)
-                c.EmitDelegate((Player player) => {
-                    Item key = Utilities.SearchForKeyInKeychains(player, ItemID.GoldenKey);
-                    if (key == null) {
-                        return false;
-                    }
-                    if (ItemLoader.ConsumeItem(key, player)) {
-                        key.stack--;
-                    }
-                    if (key.stack <= 0) {
-                        key.TurnToAir();
-                    }
-                    return true;
-                });
-                // TODO: Copy the BRTRUE instruction IL_00ce: brtrue.s IL_00d1 to right below the EmitDelegate, too!
 
-                // TODO: Make something similar for Obsidian Lock Box (just don't consume the shadow key)
+                // Skip to the Obsidian Lockbox ID
+                c.GotoNext(MoveType.After, i => i.MatchLdfld<Item>("type"), i => i.MatchLdcI4(ItemID.ObsidianLockbox));
+                c.Index++; // Go below the equals check
+
+                // Get the label needed to jump to if we found the key
+                ILLabel obsidianLockLabel = null;
+                c2.GotoNext(MoveType.After, i => i.MatchLdfld<Item>("type"), i => i.MatchLdcI4(ItemID.ObsidianLockbox));
+                c2.GotoNext(i => i.MatchBrtrue(out obsidianLockLabel));
+                if (obsidianLockLabel != null) {
+                    // Push the following onto the stack:
+                    c.Emit(Mono.Cecil.Cil.OpCodes.Ldarg_1); // Player (arg1)
+                    c.EmitDelegate((Player player) => {
+                        return Utilities.SearchForKeyInKeychains(player, ItemID.ShadowKey) != null;
+                    });
+                    c.EmitBrtrue(obsidianLockLabel);
+                }
 
             } catch (Exception e) {
                 MonoModHooks.DumpIL(ModContent.GetInstance<FaeQOL>(), il);
