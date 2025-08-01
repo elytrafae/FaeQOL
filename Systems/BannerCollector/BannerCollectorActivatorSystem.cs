@@ -15,16 +15,31 @@ namespace FaeQOL.Systems.BannerCollector {
             On_SceneMetrics.ScanAndExportToMain += On_SceneMetrics_ScanAndExportToMain;
         }
 
+        public static Dictionary<int, int> itemToBannerIDs = new Dictionary<int, int>();
+
         private void On_SceneMetrics_ScanAndExportToMain(On_SceneMetrics.orig_ScanAndExportToMain orig, SceneMetrics self, SceneMetricsScanSettings settings) {
             orig(self, settings);
-            foreach (Item item in Main.LocalPlayer.inventory) {
-                int bannerID = NPCLoader.BannerItemToNPC(item.type);
-                if (bannerID == -1) {
-                    bannerID = GetVanillaBannerIDFromItem(item);
-                }
-                if (bannerID != -1 && ItemID.Sets.BannerStrength.IndexInRange(item.type) && ItemID.Sets.BannerStrength[item.type].Enabled) {
+            foreach (Item item in Main.LocalPlayer.GetModPlayer<BannerCollectorModPlayer>().BannerInventory) {
+                if (itemToBannerIDs.TryGetValue(item.type, out int bannerID)) {
                     Main.SceneMetrics.NPCBannerBuff[bannerID] = true;
                     Main.SceneMetrics.hasBanner = true;
+                }
+            }
+        }
+
+        public static bool IsBanner(int itemID) { 
+            return itemToBannerIDs.ContainsKey(itemID);
+        }
+
+        public override void PostSetupContent() {
+            // Get a list of every banner item, and their corresponding banner items
+            foreach (var pair in ContentSamples.ItemsByType) {
+                int bannerID = NPCLoader.BannerItemToNPC(pair.Key);
+                if (bannerID == -1) {
+                    bannerID = GetVanillaBannerIDFromItem(pair.Value);
+                }
+                if (bannerID != -1 && ItemID.Sets.BannerStrength.IndexInRange(pair.Key) && ItemID.Sets.BannerStrength[pair.Key].Enabled) { 
+                    itemToBannerIDs.Add(pair.Key, bannerID);
                 }
             }
         }
