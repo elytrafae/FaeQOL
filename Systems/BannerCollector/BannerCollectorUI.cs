@@ -1,4 +1,5 @@
-﻿using FaeQOL.Systems.Config;
+﻿using FaeQOL.Content.BuilderToggles;
+using FaeQOL.Systems.Config;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,7 +15,6 @@ using Terraria.ModLoader.UI.Elements;
 using Terraria.UI;
 
 namespace FaeQOL.Systems.BannerCollector {
-#if DEBUG
     internal class BannerCollectorUI : UIState {
 
         private UIElement area;
@@ -63,6 +63,9 @@ namespace FaeQOL.Systems.BannerCollector {
 
         public override void Draw(SpriteBatch spriteBatch) {
             // Add draw condition here, if ever relevant
+            if (!BannerCollectorToggle.Get().IsOn) {
+                return;
+            }
             UpdateSlots();
             base.Draw(spriteBatch);
         }
@@ -74,6 +77,9 @@ namespace FaeQOL.Systems.BannerCollector {
 
         public override void Update(GameTime gameTime) {
             Main.LocalPlayer.GetModPlayer<BannerCollectorModPlayer>().RemoveEmptyStacksFromBannerInventory();
+            if (!BannerCollectorToggle.Get().IsOn) {
+                return;
+            }
             UpdateSlots();
             base.Update(gameTime);
         }
@@ -169,5 +175,4 @@ namespace FaeQOL.Systems.BannerCollector {
             }
         }
     }
-#endif
 }

@@ -3,5 +3,4 @@
 - Fixed the torch toggle sprites
 
 TODO:
-- Banner collector
 - Finish Vanity Set

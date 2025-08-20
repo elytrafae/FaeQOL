@@ -9,7 +9,6 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-// TODO: Continue this (below code is from examplemod)
 namespace FaeQOL.Content.BuilderToggles {
 
     public class TorchPickupBuilderToggle : BuilderToggle {

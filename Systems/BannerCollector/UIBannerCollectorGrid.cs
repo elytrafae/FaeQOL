@@ -11,7 +11,6 @@ using Terraria.ModLoader.UI.Elements;
 using Terraria.UI;
 
 namespace FaeQOL.Systems.BannerCollector {
-#if DEBUG
     internal class UIBannerCollectorGrid : UIGrid {
 
         public override void LeftClick(UIMouseEvent evt) {
@@ -48,5 +47,4 @@ namespace FaeQOL.Systems.BannerCollector {
         }
 
     }
-#endif
 }

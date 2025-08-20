@@ -28,6 +28,14 @@ namespace FaeQOL.Systems.Config {
         [ReloadRequired]
         public bool EnableEventDisablers;
 
+        [DefaultValue(true)]
+        [ReloadRequired]
+        public bool EnableBannerCollector;
+
+        [DefaultValue(true)]
+        [ReloadRequired]
+        public bool BannerCollectorEffects;
+
         [Header("Experimental")]
         [DefaultValue(false)]
         [ReloadRequired]

@@ -62,6 +62,16 @@ Configs: {
 			Tooltip: If enabled, there will be some items added that let you disable naturally occurring and repetitive events.
 		}
 
+		EnableBannerCollector: {
+			Label: Enable Banner Collector
+			Tooltip: If enabled, banners will go into a separate, specialized storage upon pickup, accessible from a button on the left side of the inventory
+		}
+
+		BannerCollectorEffects: {
+			Label: Banner Collector Gives Effects
+			Tooltip: If enabled alongside Banner Collector, banners inside the collector's inventory will give its effects to you
+		}
+
 		Headers.Experimental: Experimental Header
 
 		EnableOaths: {
@@ -85,4 +95,6 @@ BuilderToggles: {
 		OnText: Stack to default torch on pickup on
 		OffText: Stack to default torch on pickup off
 	}
+
+	BannerCollectorToggle.Text: Banner Collector Menu
 }

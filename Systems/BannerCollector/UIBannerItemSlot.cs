@@ -14,7 +14,6 @@ using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FaeQOL.Systems.BannerCollector {
-#if DEBUG
     public class UIBannerItemSlot : UIElement {
 
         private List<Item> inventory;
@@ -107,5 +106,4 @@ namespace FaeQOL.Systems.BannerCollector {
         }
 
     }
-#endif
 }

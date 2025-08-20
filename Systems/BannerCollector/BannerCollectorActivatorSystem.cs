@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FaeQOL.Content.BuilderToggles;
+using FaeQOL.Systems.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 
 namespace FaeQOL.Systems.BannerCollector {
-#if DEBUG
+
     internal class BannerCollectorActivatorSystem : ModSystem {
 
         public override void Load() {
@@ -20,11 +22,20 @@ namespace FaeQOL.Systems.BannerCollector {
 
         private void On_SceneMetrics_ScanAndExportToMain(On_SceneMetrics.orig_ScanAndExportToMain orig, SceneMetrics self, SceneMetricsScanSettings settings) {
             orig(self, settings);
-            foreach (Item item in Main.LocalPlayer.GetModPlayer<BannerCollectorModPlayer>().BannerInventory) {
-                if (itemToBannerIDs.TryGetValue(item.type, out int bannerID)) {
-                    Main.SceneMetrics.NPCBannerBuff[bannerID] = true;
-                    Main.SceneMetrics.hasBanner = true;
+            ServerConfig config = ModContent.GetInstance<ServerConfig>();
+            if (config.EnableBannerCollector && config.BannerCollectorEffects) {
+                foreach (Item item in Main.LocalPlayer.GetModPlayer<BannerCollectorModPlayer>().BannerInventory) {
+                    if (itemToBannerIDs.TryGetValue(item.type, out int bannerID)) {
+                        Main.SceneMetrics.NPCBannerBuff[bannerID] = true;
+                        Main.SceneMetrics.hasBanner = true;
+                    }
                 }
+            }
+        }
+
+        public override void PostUpdatePlayers() {
+            if (!Main.playerInventory) {
+                BannerCollectorToggle.Get().IsOn = false;
             }
         }
 
@@ -96,5 +107,5 @@ namespace FaeQOL.Systems.BannerCollector {
             return true;
         }
     }
-#endif
+
 }
