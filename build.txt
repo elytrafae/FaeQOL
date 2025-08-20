@@ -1,6 +1,6 @@
 displayName = Fae's Quality of Life
 author = elytrafae
-version = 2.0
+version = 2.1
 homepage = https://github.com/elytrafae/FaeQOL
 // weakReferences = ThoriumMod
 // dllReferences = MMHOOK_ThoriumMod

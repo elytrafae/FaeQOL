@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 
 namespace FaeQOL.Systems.BannerCollector {
+#if DEBUG
     internal class BannerCollectorActivatorSystem : ModSystem {
 
         public override void Load() {
@@ -95,4 +96,5 @@ namespace FaeQOL.Systems.BannerCollector {
             return true;
         }
     }
+#endif
 }

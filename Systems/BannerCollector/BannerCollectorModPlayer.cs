@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace FaeQOL.Systems.BannerCollector {
+#if DEBUG
     public class BannerCollectorModPlayer : ModPlayer {
 
         public const string BANNER_INVENTORY_KEY = "BannerInventory";
@@ -54,4 +55,5 @@ namespace FaeQOL.Systems.BannerCollector {
         }
 
     }
+#endif
 }

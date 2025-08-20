@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FaeQOL.Systems.BannerCollector {
-
-    // Copy-paste from FaeCustomUIItemSlot, except it works with a List<Item>!
+#if DEBUG
     public class UIBannerItemSlot : UIElement {
 
         private List<Item> inventory;
@@ -23,13 +23,15 @@ namespace FaeQOL.Systems.BannerCollector {
         private readonly float scale;
         public bool viewonly;
 
+
+
         // The context is for visuals only!
-        public UIBannerItemSlot(List<Item> inventory, int slot, float scale, int context) {
+        public UIBannerItemSlot(List<Item> inventory, int slot, float scale, bool readOnly) {
             this.inventory = inventory;
             this.slot = slot;
-            this.context = context;
+            this.context = readOnly ? ItemSlot.Context.BankItem : ItemSlot.Context.CraftingMaterial;
             this.scale = scale;
-            this.viewonly = false;
+            this.viewonly = readOnly;
 
             Width.Set(TextureAssets.InventoryBack9.Width() * scale, 0f);
             Height.Set(TextureAssets.InventoryBack9.Height() * scale, 0f);
@@ -40,14 +42,14 @@ namespace FaeQOL.Systems.BannerCollector {
                 if (this.viewonly != other.viewonly) {
                     return this.viewonly ? 1 : -1;
                 }
-                if (inventory.IndexInRange(slot)) { return 1; }
-                if (other.inventory.IndexInRange(other.slot)) { return -1; }
+                if (!inventory.IndexInRange(slot)) { return 1; }
+                if (!other.inventory.IndexInRange(other.slot)) { return -1; }
                 Item thisItem = inventory[slot];
                 Item otherItem = other.inventory[other.slot];
                 if (thisItem.stack != otherItem.stack) {
-                    return thisItem.stack - otherItem.stack;
+                    return otherItem.stack - thisItem.stack;
                 }
-                return thisItem.type - otherItem.type;
+                return otherItem.type - thisItem.type;
             }
             return base.CompareTo(obj);
         }
@@ -71,12 +73,18 @@ namespace FaeQOL.Systems.BannerCollector {
 
             if (ContainsPoint(Main.MouseScreen) && !PlayerInput.IgnoreMouseInterface) {
                 Main.LocalPlayer.mouseInterface = true;
-                if (viewonly) {
-                    ItemSlot.OverrideHover(ref item, context);
-                    ItemSlot.MouseHover(ref item, context);
-                } else if (IsReadyToTakeItemsFromSlot(ref item) && CanInsertItem(Main.mouseItem)) {
-                    // Handle handles all the click and hover actions based on the context.
-                    ItemSlot.Handle(ref item, context);
+                ItemSlot.MouseHover(ref item, context);
+                if (!viewonly) {
+                    if (Main.mouseLeft && Main.mouseLeftRelease) {
+                        if (!Main.mouseItem.IsAir) {
+                            UIBannerCollectorGrid.TryPutMouseStackIntoBannerInventory();
+                        } else if (IsReadyToTakeItemsFromSlot(ref item)) {
+                            StackOrTake(item, ref Main.mouseItem);
+                        }
+                    }
+                    if (Main.mouseRight && Main.mouseRightRelease && IsReadyToTakeItemsFromSlot(ref item)) {
+                        StackOrTake(item, ref Main.mouseItem);
+                    }
                 }
             }
             // Draw draws the slot itself and Item. Depending on context, the color will change, as will drawing other things like stack counts.
@@ -85,9 +93,19 @@ namespace FaeQOL.Systems.BannerCollector {
             inventory[slot] = item;
         }
 
+        private void StackOrTake(Item source, ref Item destination) {
+            if (destination.IsAir) {
+                destination = source.Clone();
+                source.TurnToAir();
+                return;
+            }
+            ItemLoader.StackItems(destination, source, out int transferred);
+        }
+
         private bool IsReadyToTakeItemsFromSlot(ref Item item) { 
             return Main.mouseItem.IsAir || (item.type == Main.mouseItem.type && ItemLoader.CanStack(item, Main.mouseItem));
         }
 
     }
+#endif
 }

@@ -14,11 +14,13 @@ using Terraria.ModLoader.UI.Elements;
 using Terraria.UI;
 
 namespace FaeQOL.Systems.BannerCollector {
+#if DEBUG
     internal class BannerCollectorUI : UIState {
 
         private UIElement area;
         private UIPanel panel;
         private UIBannerCollectorGrid inventoryGrid;
+        private UIScrollbar inventoryScrollbar;
         private List<UIBannerItemSlot> slots = new();
         private List<Item> viewonlyItems = new();
         private List<UIBannerItemSlot> viewonlySlots = new();
@@ -44,9 +46,17 @@ namespace FaeQOL.Systems.BannerCollector {
             inventoryGrid.Height.Set(0, 1f);
             inventoryGrid.MaxHeight.Set(0, 1f);
             inventoryGrid.ListPadding = 2.5f;
+            inventoryGrid.SetScrollbar(inventoryScrollbar);
             panel.Append(inventoryGrid);
 
-            //UpdateSlots();
+            inventoryScrollbar = new UIScrollbar();
+            inventoryScrollbar.Height.Set(-10f, 1f);
+            inventoryScrollbar.Left.Set(-inventoryScrollbar.Width.Pixels + 5f, 1f);
+            inventoryScrollbar.Top.Set(5f, 0f);
+            panel.Append(inventoryScrollbar);
+
+            inventoryGrid.Width.Set(-inventoryScrollbar.Width.Pixels, 1f);
+            inventoryGrid.SetScrollbar(inventoryScrollbar);
 
             Append(area);
         }
@@ -68,28 +78,36 @@ namespace FaeQOL.Systems.BannerCollector {
             base.Update(gameTime);
         }
 
+        public void UpdateGridOrder() { 
+            inventoryGrid.UpdateOrder();
+        }
+
         private void UpdateSlots() {
 
-            // Testing for now
-            if (viewonlySlots.Count <= 0) {
-                foreach (var pair in BannerCollectorActivatorSystem.itemToBannerIDs) {
-                    viewonlyItems.Add(new Item(pair.Key));
-                    UIBannerItemSlot slot = new UIBannerItemSlot(viewonlyItems, viewonlyItems.Count-1, 1f, ItemSlot.Context.BankItem);
-                    slot.viewonly = true;
-                    viewonlySlots.Add(slot);
-                    inventoryGrid.Add(slot);
-                }
-            }
-
             BannerCollectorModPlayer modPlayer = Main.LocalPlayer.GetModPlayer<BannerCollectorModPlayer>();
+            modPlayer.RemoveEmptyStacksFromBannerInventory();
             List<Item> BannerInventory = modPlayer.BannerInventory;
+
             if (BannerInventory.Count == slots.Count) {
                 return;
             }
 
+            viewonlyItems.Clear();
+            HashSet<int> viewOnlyIDs = new HashSet<int>();
+            foreach (var pair in BannerCollectorActivatorSystem.itemToBannerIDs) {
+                viewOnlyIDs.Add(pair.Key);
+            }
+            foreach (Item banner in BannerInventory) {
+                viewOnlyIDs.Remove(banner.type);
+            }
+
+            foreach (var id in viewOnlyIDs) {
+                viewonlyItems.Add(new Item(id));
+            }
+
             if (BannerInventory.Count > slots.Count) {
                 for (int i = slots.Count; i < BannerInventory.Count; i++) {
-                    UIBannerItemSlot slot = new UIBannerItemSlot(modPlayer.BannerInventory, i, 1f, ItemSlot.Context.GuideItem);
+                    UIBannerItemSlot slot = new UIBannerItemSlot(modPlayer.BannerInventory, i, 1f, false);
                     slots.Add(slot);
                     inventoryGrid.Add(slot);
                 }
@@ -99,7 +117,23 @@ namespace FaeQOL.Systems.BannerCollector {
                     slots.RemoveAt(i);
                 }
             }
-                
+
+            if (viewonlyItems.Count > viewonlySlots.Count) {
+                for (int i = viewonlySlots.Count; i < viewonlyItems.Count; i++) {
+                    UIBannerItemSlot slot = new UIBannerItemSlot(viewonlyItems, i, 1f, true);
+                    viewonlySlots.Add(slot);
+                    inventoryGrid.Add(slot);
+                }
+            } else {
+                for (int i = viewonlySlots.Count - 1; i >= viewonlyItems.Count; i--) {
+                    inventoryGrid.Remove(viewonlySlots[i]);
+                    viewonlySlots.RemoveAt(i);
+                }
+            }
+
+
+            UpdateGridOrder();
+
         }
 
     }
@@ -109,7 +143,7 @@ namespace FaeQOL.Systems.BannerCollector {
     internal class BannerCollectorUISystem : ModSystem {
         private UserInterface BannerCollectorUserInterface;
 
-        internal BannerCollectorUI BannerCollectorUI;
+        internal static BannerCollectorUI BannerCollectorUI;
 
         public override void Load() {
             BannerCollectorUI = new();
@@ -122,7 +156,7 @@ namespace FaeQOL.Systems.BannerCollector {
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
-            int resourceBarIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
+            int resourceBarIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if (resourceBarIndex != -1) {
                 layers.Insert(resourceBarIndex, new LegacyGameInterfaceLayer(
                     nameof(FaeQOL) + ": BannerCollector",
@@ -135,4 +169,5 @@ namespace FaeQOL.Systems.BannerCollector {
             }
         }
     }
+#endif
 }

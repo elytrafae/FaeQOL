@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -10,31 +11,36 @@ using Terraria.ModLoader.UI.Elements;
 using Terraria.UI;
 
 namespace FaeQOL.Systems.BannerCollector {
+#if DEBUG
     internal class UIBannerCollectorGrid : UIGrid {
 
         public override void LeftClick(UIMouseEvent evt) {
             base.LeftClick(evt);
-            AnyClick(evt);
+            TryPutMouseStackIntoBannerInventory();
         }
 
         public override void RightClick(UIMouseEvent evt) {
             base.RightClick(evt);
-            AnyClick(evt);
+            
         }
 
-        private void AnyClick(UIMouseEvent evt) {
-            if (BannerCollectorActivatorSystem.IsBanner(Main.mouseItem.type) && IsClickedObjectAChild(this, evt.Target)) {
+        public static void TryPutMouseStackIntoBannerInventory() {
+            if (BannerCollectorActivatorSystem.IsBanner(Main.mouseItem.type)) {
                 Main.LocalPlayer.GetModPlayer<BannerCollectorModPlayer>().StackBannerIntoBannerInventory(Main.LocalPlayer.HeldItem);
                 Main.mouseItem = Main.LocalPlayer.HeldItem;
             }
         }
 
-        private bool IsClickedObjectAChild(UIElement parent, UIElement target) {
+        private static bool IsClickedObjectAChild(UIElement parent, UIElement target) {
             if (parent.Equals(target)) {
                 return true;
             }
-            foreach (UIElement child in Children) {
+            foreach (UIElement child in parent.Children) {
+                /*
                 if (target.Equals(child)) {
+                    return true;
+                }*/
+                if (IsClickedObjectAChild(child, target)) {
                     return true;
                 }
             }
@@ -42,4 +48,5 @@ namespace FaeQOL.Systems.BannerCollector {
         }
 
     }
+#endif
 }
