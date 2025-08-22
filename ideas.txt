@@ -1,6 +1,5 @@
 
-- Fixed Lockboxes not working with Keychains
-- Fixed the torch toggle sprites
+- Fixed the Banner UI being heavily desynced when opened while it is empty
 
 TODO:
 - Finish Vanity Set

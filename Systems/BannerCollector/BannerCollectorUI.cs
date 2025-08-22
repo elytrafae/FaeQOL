@@ -94,7 +94,7 @@ namespace FaeQOL.Systems.BannerCollector {
             modPlayer.RemoveEmptyStacksFromBannerInventory();
             List<Item> BannerInventory = modPlayer.BannerInventory;
 
-            if (BannerInventory.Count == slots.Count) {
+            if (BannerInventory.Count == slots.Count && BannerCollectorActivatorSystem.itemToBannerIDs.Count == slots.Count + viewonlySlots.Count) {
                 return;
             }
 
